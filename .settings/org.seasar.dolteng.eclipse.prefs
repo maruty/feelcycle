@@ -1,0 +1,8 @@
+DaoType=S2JDBC
+DefaultResourcePath=/feelcycle/src/main/resources
+DefaultRootPackage=com.marublo.feelcycle
+DefaultSrcPath=/feelcycle/src/main/java
+ServletPath=/feelcycle
+ViewType=SA-Struts
+WebContentsRoot=target/m2e-wtp/web-resources
+eclipse.preferences.version=1
