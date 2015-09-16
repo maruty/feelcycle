@@ -6,6 +6,10 @@
 	<packaging>war</packaging>
 	<name>feelcycle</name>
 	<build>
+
+        <!-- パッケージングした際の名前 -->
+        <finalName>ROOT</finalName>
+
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<resources>
@@ -30,6 +34,46 @@
 					<encoding>UTF-8</encoding>
 				</configuration>
 			</plugin>
+
+
+            <!--ちりちりテスト -->
+
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <configuration>
+                  <container>
+                    <containerId>tomcat7x</containerId>
+                    <type>remote</type>
+                  </container>
+                  <configuration>
+                    <type>runtime</type>
+                    <properties>
+                      <cargo.tomcat.manager.url>http://localhost/manager</cargo.tomcat.manager.url>
+                      <cargo.remote.username>tiritiri</cargo.remote.username><!--変更-->
+                      <cargo.remote.password>maruty00?</cargo.remote.password><!--変更-->
+                    </properties>
+                  </configuration>
+                  <deployer>
+                    <type>remote</type>
+                    <deployables>
+                      <deployable>
+                        <groupId>com.marublo.feelcycle</groupId><!--変更-->
+                        <artifactId>feelcycle</artifactId><!--変更-->
+                        <type>war</type>
+                      </deployable>
+                    </deployables>
+                  </deployer>
+                </configuration>
+            </plugin>       
+
+
+
+
+
+
+
+
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
@@ -46,10 +90,9 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+                    <!-- Eclipseプロジェクト設定を有効化 -->
+                    <groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
-					<configuration>
-						<wtpversion>1.5</wtpversion>
-					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -60,6 +103,19 @@
 			<name>The Seasar Foundation Maven2 Repository</name>
 			<url>http://maven.seasar.org/maven2</url>
 		</pluginRepository>
+
+        <!--Cargo Maven2 Pluginを使ってみる
+         Cargo Maven2 PluginはTomcatの起動・終了などの操作をMaven2から行えるようにするプラグインらしいです。 リモートのTomcatに対してデプロイ・アンデプロイする機能を持つので、こんなに簡単だと。
+
+    -->
+        <pluginRepository>
+          <id>codehaus snapshot repository</id>
+          <url>http://snapshots.repository.codehaus.org/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </pluginRepository>
+
 	</pluginRepositories>
 	<repositories>
 		<repository>
