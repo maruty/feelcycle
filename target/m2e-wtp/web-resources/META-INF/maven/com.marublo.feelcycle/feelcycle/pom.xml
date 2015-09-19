@@ -55,7 +55,7 @@
                     <type>runtime</type>
                     <properties>
                       <!-- <cargo.tomcat.manager.url>http://localhost/manager</cargo.tomcat.manager.url> -->
-                       <cargo.hostname>http://localhost/manager</cargo.hostname>
+                       <cargo.hostname>http://52.69.227.6//manager</cargo.hostname>
                        <cargo.servlet.port>80</cargo.servlet.port>
                      <cargo.remote.username>tiritiri</cargo.remote.username>
                       <cargo.remote.password>maruty00?</cargo.remote.password>
@@ -72,8 +72,7 @@
 			            <artifactId>feelcycle</artifactId>
 			            <type>war</type>
 			            <properties>
-			            <context>/opt/tomcat7/webapps</context>
-			             <!--  <context>/</context>-->
+			              <context>/</context>
 			            </properties>
 			          </deployable>
 			        </deployables>
