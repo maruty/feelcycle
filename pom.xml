@@ -72,7 +72,8 @@
 			            <artifactId>feelcycle</artifactId>
 			            <type>war</type>
 			            <properties>
-			              <context>/</context>
+			            <context>/opt/tomcat7/webapps</context>
+			             <!--  <context>/</context>-->
 			            </properties>
 			          </deployable>
 			        </deployables>
