@@ -19,8 +19,12 @@ import org.seasar.struts.annotation.Execute;
 
 public class IndexAction {
 	
+	 public String unko = "うんこー";
+	
     @Execute(validator = false)
 	public String index() {
+    	
+    	
         return "index.jsp";
 	}
 }
