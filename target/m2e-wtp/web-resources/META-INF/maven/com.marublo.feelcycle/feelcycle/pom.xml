@@ -46,18 +46,38 @@
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
                 <configuration>
-                  <container>
-                    <containerId>tomcat7x</containerId>
-                    <type>remote</type>
-                  </container>
+		 <!-- Container configuration -->
+		        <container>
+		          <containerId>tomcat7x</containerId>
+		          <type>remote</type>
+		        </container>
                   <configuration>
                     <type>runtime</type>
                     <properties>
-                      <cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
-                      <cargo.remote.username>tomcat</cargo.remote.username>
+                      <!-- <cargo.tomcat.manager.url>http://localhost/manager</cargo.tomcat.manager.url> -->
+                       <cargo.hostname>http://localhost/manager</cargo.hostname>
+                       <cargo.servlet.port>80</cargo.servlet.port>
+                     <cargo.remote.username>tomcat</cargo.remote.username>
                       <cargo.remote.password>tomcat</cargo.remote.password>
                     </properties>
                   </configuration>
+                        <!-- Deployer configuration -->
+			        <deployer>
+			          <type>remote</type>
+			        </deployer>
+			        <!-- Deployables configuration -->
+			        <deployables>
+			          <deployable>
+			            <groupId>test.com.feel</groupId>
+			            <artifactId>feelnoTest</artifactId>
+			            <type>war</type>
+			            <properties>
+			              <context>/</context>
+			            </properties>
+			          </deployable>
+			        </deployables>
+      			</configuration>
+                  <!-- 
                   <deployer>
                     <type>remote</type>
                     <deployables>
@@ -65,10 +85,12 @@
                         <groupId>com.marublo.feelcycle.test</groupId>
                         <artifactId>feelcycleTest</artifactId>
                         <type>war</type>
+                        
                       </deployable>
                     </deployables>
                   </deployer>
                 </configuration>
+                 -->
             </plugin>
             
 
