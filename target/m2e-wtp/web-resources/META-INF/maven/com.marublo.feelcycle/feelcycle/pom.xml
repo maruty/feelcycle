@@ -68,8 +68,8 @@
 			        <!-- Deployables configuration -->
 			        <deployables>
 			          <deployable>
-			            <groupId>test.com.feel</groupId>
-			            <artifactId>feelnoTest</artifactId>
+			            <groupId>com.marublo.feelcycle</groupId>
+			            <artifactId>feelcycle</artifactId>
 			            <type>war</type>
 			            <properties>
 			              <context>/</context>
