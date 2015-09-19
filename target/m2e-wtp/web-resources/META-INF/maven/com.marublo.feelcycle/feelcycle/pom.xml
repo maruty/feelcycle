@@ -4,6 +4,9 @@
 	<artifactId>feelcycle</artifactId>
 	<version>0.0.1</version>
 	<packaging>war</packaging>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 	<name>feelcycle</name>
 	<build>
         <!-- パッケージングした際の名前 -->
@@ -35,6 +38,10 @@
 
 
     <!--ちりちりテスト2 -->
+    
+    
+    
+  
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
@@ -47,22 +54,25 @@
                     <type>runtime</type>
                     <properties>
                       <cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
-                      <cargo.remote.username>tomcat</cargo.remote.username><!--変更-->
-                      <cargo.remote.password>tomcat</cargo.remote.password><!--変更-->
+                      <cargo.remote.username>tomcat</cargo.remote.username>
+                      <cargo.remote.password>tomcat</cargo.remote.password>
                     </properties>
                   </configuration>
                   <deployer>
                     <type>remote</type>
                     <deployables>
                       <deployable>
-                        <groupId>com.marublo.feelcycle</groupId><!--変更-->
-                        <artifactId>feelcycle</artifactId><!--変更-->
+                        <groupId>com.marublo.feelcycle.test</groupId>
+                        <artifactId>feelcycleTest</artifactId>
                         <type>war</type>
                       </deployable>
                     </deployables>
                   </deployer>
                 </configuration>
             </plugin>
+            
+
+            <!-- 
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
@@ -75,16 +85,21 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
+		
+		 -->
+		  <!-- Eclipseプロジェクト設定を有効化 -->
+		  <!-- 
 		<pluginManagement>
 			<plugins>
 				<plugin>
-                    <!-- Eclipseプロジェクト設定を有効化 -->
+                  
                     <groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-eclipse-plugin</artifactId>
 				</plugin>
 			</plugins>
 		</pluginManagement>
+		 -->
+		 </plugins>
 	</build>
 	<pluginRepositories>
 		<pluginRepository>
