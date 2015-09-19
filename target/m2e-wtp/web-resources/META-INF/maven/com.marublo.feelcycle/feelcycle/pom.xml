@@ -10,7 +10,7 @@
 	<name>feelcycle</name>
 	<build>
         <!-- パッケージングした際の名前 -->
-        <finalName>ROOT</finalName>
+        <finalName>feelcycle</finalName>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<resources>
