@@ -6,10 +6,8 @@
 	<packaging>war</packaging>
 	<name>feelcycle</name>
 	<build>
-
         <!-- パッケージングした際の名前 -->
         <finalName>ROOT</finalName>
-
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<outputDirectory>src/main/webapp/WEB-INF/classes</outputDirectory>
 		<resources>
@@ -36,8 +34,7 @@
 			</plugin>
 
 
-            <!--ちりちりテスト -->
-
+    <!--ちりちりテスト2 -->
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
@@ -49,9 +46,9 @@
                   <configuration>
                     <type>runtime</type>
                     <properties>
-                      <cargo.tomcat.manager.url>http://localhost/manager</cargo.tomcat.manager.url>
-                      <cargo.remote.username>tiritiri</cargo.remote.username><!--変更-->
-                      <cargo.remote.password>maruty00?</cargo.remote.password><!--変更-->
+                      <cargo.tomcat.manager.url>http://localhost:8080/manager</cargo.tomcat.manager.url>
+                      <cargo.remote.username>tomcat</cargo.remote.username><!--変更-->
+                      <cargo.remote.password>tomcat</cargo.remote.password><!--変更-->
                     </properties>
                   </configuration>
                   <deployer>
@@ -65,15 +62,7 @@
                     </deployables>
                   </deployer>
                 </configuration>
-            </plugin>       
-
-
-
-
-
-
-
-
+            </plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
