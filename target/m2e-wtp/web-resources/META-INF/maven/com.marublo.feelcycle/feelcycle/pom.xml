@@ -89,6 +89,7 @@
          Cargo Maven2 PluginはTomcatの起動・終了などの操作をMaven2から行えるようにするプラグインらしいです。 リモートのTomcatに対してデプロイ・アンデプロイする機能を持つので、こんなに簡単だと。
 
     -->
+    <!-- うまくいってないのでいったん使わない
         <pluginRepository>
           <id>codehaus snapshot repository</id>
           <url>http://snapshots.repository.codehaus.org/</url>
@@ -96,7 +97,7 @@
             <enabled>true</enabled>
           </releases>
         </pluginRepository>
-
+ -->
 	</pluginRepositories>
 	<repositories>
 		<repository>
@@ -110,6 +111,8 @@
 			<url>http://maven.seasar.org/maven2</url>
 		</repository>
 	</repositories>
+	
+	
 	<dependencies>
         <dependency>
             <groupId>cglib</groupId>
@@ -117,6 +120,11 @@
             <version>2.1_3</version>
             <scope>test</scope>
         </dependency>
+		<dependency>
+			 <groupId>mysql</groupId>
+			 <artifactId>mysql-connector-java</artifactId>
+		 <version>5.1.31</version>
+		</dependency>
         <dependency>
             <groupId>org.easymock</groupId>
             <artifactId>easymock</artifactId>
