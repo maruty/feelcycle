@@ -15,7 +15,13 @@
  */
 package com.marublo.feelcycle.action;
 
+import java.util.List;
+
 import org.seasar.struts.annotation.Execute;
+
+import com.marublo.feelcycle.entity.User;
+import com.marublo.feelcycle.service.UserService;
+
 
 public class IndexAction {
 	
@@ -23,7 +29,10 @@ public class IndexAction {
 	
     @Execute(validator = false)
 	public String index() {
+    	UserService user = new UserService();
+    	List<User> userList = user.findAll();
     	
+    	unko = userList.get(0).userId;
     	
         return "index.jsp";
 	}

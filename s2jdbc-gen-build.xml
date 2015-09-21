@@ -1,4 +1,4 @@
-<project name="feelcycle-s2jdbc-gen" default="gen-ddl" basedir=".">
+<project name="feelcycle-s2jdbc-gen" default="gen-entity" basedir=".">
 
   <property name="classpathdir" value="src/main/webapp/WEB-INF/classes"/>
   <property name="rootpackagename" value="com.marublo.feelcycle"/>
@@ -21,9 +21,15 @@
     <pathelement location="${classpathdir}"/>
     <fileset dir="src/main/webapp/WEB-INF/lib">
       <exclude name="src/main/webapp/WEB-INF/lib/sources/**"/>
+	  <!--<exclude name="/Users/01008973/.m2/repository/**"/>-->
     </fileset>
     <fileset dir="lib">
+
       <exclude name="lib/sources/**"/>
+
+    	<!--
+    	<exclude name="/Users/01008973/.m2/repository/**"/>
+    	-->
     </fileset>
   </path>
 
