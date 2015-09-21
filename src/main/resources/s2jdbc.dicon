@@ -8,7 +8,6 @@
 		<property name="maxRows">0</property>
 		<property name="fetchSize">0</property>
 		<property name="queryTimeout">600</property>
-		<!-- mysqlの設定を使用 -->
 		<property name="dialect">mysqlDialect</property>
 		
 		<!--

@@ -17,22 +17,31 @@ package com.marublo.feelcycle.action;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.seasar.extension.jdbc.JdbcManager;
 import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.entity.User;
-import com.marublo.feelcycle.service.UserService;
 
 
 public class IndexAction {
+	@Resource
+	public JdbcManager jdbcManager;
 	
-	 public String unko = "うんこー";
+	
+	public String unko = "";
 	
     @Execute(validator = false)
 	public String index() {
-    	UserService user = new UserService();
-    	List<User> userList = user.findAll();
+    	//String unko = "うんこー";
+    	//UserService user = new UserService();
     	
-    	unko = userList.get(0).userId;
+    	List<User> userList = jdbcManager.from(User.class)
+                .getResultList();
+    	
+    	
+    	this.unko = userList.get(0).userId.toString();
     	
         return "index.jsp";
 	}
