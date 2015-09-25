@@ -3,6 +3,9 @@ package com.marublo.feelcycle.service;
 import com.marublo.feelcycle.entity.UserFeelcycle;
 import java.util.List;
 import javax.annotation.Generated;
+import javax.annotation.Resource;
+
+import org.seasar.extension.jdbc.JdbcManager;
 
 import static com.marublo.feelcycle.entity.UserFeelcycleNames.*;
 import static org.seasar.extension.jdbc.operation.Operations.*;
@@ -14,6 +17,13 @@ import static org.seasar.extension.jdbc.operation.Operations.*;
 @Generated(value = {"S2JDBC-Gen 2.4.46", "org.seasar.extension.jdbc.gen.internal.model.ServiceModelFactoryImpl"}, date = "2015/09/21 17:01:10")
 public class UserFeelcycleService extends AbstractService<UserFeelcycle> {
 
+	/*************DI*******************/
+	@Resource
+	protected JdbcManager jdbcManager;
+	/*************DI*******************/
+	
+	
+	
     /**
      * 識別子でエンティティを検索します。
      * 

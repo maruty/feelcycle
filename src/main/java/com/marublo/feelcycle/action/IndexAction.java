@@ -23,25 +23,56 @@ import org.seasar.extension.jdbc.JdbcManager;
 import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.entity.User;
+import com.marublo.feelcycle.entity.UserFeelcycle;
+import com.marublo.feelcycle.service.UserService;
+import static org.seasar.extension.jdbc.operation.Operations.*;
 
 
 public class IndexAction {
-	@Resource
-	public JdbcManager jdbcManager;
 	
+	/*
+	 * FEEL CYCLEの受講データを取得するバッチ処理
+	 * 動作させる時はjenkinsから curlコマンドで起動させる予定
+	 * 
+	 * 
+	 */
+	
+	/*************DI*******************/
+	@Resource
+	public UserService userService;
+	/*************DI*******************/
 	
 	public String unko = "";
 	
     @Execute(validator = false)
 	public String index() {
-    	//String unko = "うんこー";
-    	//UserService user = new UserService();
-    	
-    	List<User> userList = jdbcManager.from(User.class)
-                .getResultList();
+    	//ユーザー情報の取得
     	
     	
-    	this.unko = userList.get(0).userId.toString();
+    	
+    	
+    	//ユーザー情報を元に各受講データを取得
+    	
+    	
+    	//新規に追加したレッスンのみをインサートする
+    	
+    	
+    	//終了処理
+    	
+  
+    	
+    	//UserService userService = new UserService();
+    	List<User> a = userService.getAllUser();
+    	
+    	
+		//List<User> teuserList = jdbcManager.from(User.class)
+        //        .getResultList();
+    	
+		//System.out.println("aa");
+		
+		
+    	//List<User> userList = userService.getAllUser();
+    	//this.unko = userList.get(0).userId.toString();
     	
         return "index.jsp";
 	}

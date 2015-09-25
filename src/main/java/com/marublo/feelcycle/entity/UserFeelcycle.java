@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * UserFeelcycleエンティティクラス
@@ -35,4 +38,10 @@ public class UserFeelcycle implements Serializable {
     /** userPassFeelcycleプロパティ */
     @Column(length = 64, nullable = true, unique = false)
     public String userPassFeelcycle;
+    
+    /** User と多対1での結合 **/
+    
+    @ManyToOne 
+    @JoinColumn(name="USER_ID", referencedColumnName="USER_ID") 
+    public User user;
 }

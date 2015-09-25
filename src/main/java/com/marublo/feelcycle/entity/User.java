@@ -1,12 +1,16 @@
 package com.marublo.feelcycle.entity;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * Userエンティティクラス
@@ -31,4 +35,12 @@ public class User implements Serializable {
     /** userPassプロパティ */
     @Column(length = 64, nullable = true, unique = false)
     public String userPass;
+    
+    /** UserFeelCycleテーブルとjoin用のパラメータ※テーブル間の結合を定義
+     * 1のエンティティに多のエンティティを定義 **/
+    //<--TableTwoが多対１の１であること、自身がTableOneで
+    //   tableTwoとして定義されていることを追加
+    @OneToMany(mappedBy="user")
+    public List<UserFeelcycle> userFeelCycleList; 
+    
 }
