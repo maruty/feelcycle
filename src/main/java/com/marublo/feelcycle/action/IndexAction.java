@@ -20,17 +20,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.xml.xpath.XPathExpressionException;
 
 
 import org.apache.http.Header;
+import org.apache.http.ParseException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHeader;
 import org.seasar.struts.annotation.Execute;
 
+import com.marublo.feelcycle.dto.LessonDataDto;
 import com.marublo.feelcycle.entity.User;
 import com.marublo.feelcycle.service.FeelcycleService;
+import com.marublo.feelcycle.service.LesssonService;
 import com.marublo.feelcycle.service.UserService;
 
 
@@ -52,6 +56,9 @@ public class IndexAction {
 	
 	@Resource
 	public FeelcycleService feelcycleService;
+
+	@Resource
+	public LesssonService lesssonService;
 	
 	/*************DI*******************/
 	
@@ -65,14 +72,33 @@ public class IndexAction {
     	//ユーザー情報の取得
     	userList = userService.getAllUser();
     	//これあとでDTOに変える
-    	String getLessonDataDto = "";
+    	List<LessonDataDto> getLessonDataDtoList = new ArrayList();
     	
     	
     	for(int i=0; i < userList.size(); i++){
     		for(int j=0; j < userList.get(i).userFeelCycleList.size(); j++){
     			try {
-					getLessonDataDto = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
-												, userList.get(i).userFeelCycleList.get(j).userPassFeelcycle);
+					try {
+						//1ID単位のレッスン履歴情報がくる
+						getLessonDataDtoList = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
+													, userList.get(i).userFeelCycleList.get(j).userPassFeelcycle,userList.get(i).userId);
+						
+						//セレクトして存在してなかったらインサートする
+						for(LessonDataDto lesson : getLessonDataDtoList){
+							if(lesssonService.checkLessonData(lesson)){
+								//trueだったら存在していないのでインサートする
+								lesssonService.insertLessonData(lesson);
+								System.out.println("確認");
+							}else{
+								//falseだったら存在してないのでインサートしない
+								
+							}
+						}
+						
+					} catch (XPathExpressionException | ParseException e) {
+						// TODO 自動生成された catch ブロック
+						e.printStackTrace();
+					}
 				} catch (IOException e) {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();

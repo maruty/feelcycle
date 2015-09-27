@@ -81,7 +81,15 @@ public class LesssonNames {
     public static PropertyName<String> lessonTenpo() {
         return new PropertyName<String>("lessonTenpo");
     }
-
+    
+    /**
+     * lessonMashineのプロパティ名を返します。
+     * 
+     * @return lessonTenpoのプロパティ名
+     */
+    public static PropertyName<String> lessonMashine() {
+        return new PropertyName<String>("lessonMashine");
+    }
     /**
      * @author S2JDBC-Gen
      */
@@ -185,6 +193,15 @@ public class LesssonNames {
          */
         public PropertyName<String> lessonTenpo() {
             return new PropertyName<String>(this, "lessonTenpo");
+        }
+        
+        /**
+         * lessonTenpoのプロパティ名を返します。
+         *
+         * @return lessonTenpoのプロパティ名
+         */
+        public PropertyName<String> lessonMashine() {
+            return new PropertyName<String>(this, "lessonMashine");
         }
     }
 }

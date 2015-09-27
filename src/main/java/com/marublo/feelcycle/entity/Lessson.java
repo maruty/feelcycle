@@ -51,4 +51,8 @@ public class Lessson implements Serializable {
     /** lessonTenpoプロパティ */
     @Column(length = 64, nullable = true, unique = false)
     public String lessonTenpo;
+    
+    /** lessonMashineプロパティ */
+    @Column(length = 64, nullable = true, unique = false)
+    public String lessonMashine;
 }

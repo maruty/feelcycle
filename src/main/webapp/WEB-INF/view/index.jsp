@@ -4,15 +4,11 @@
 <title>Dolteng Auto Generated</title>
 </head>
 <body>
-<h1>Hello World!テストだぜ！デプロイが完全に出来たことの確認テストだよ</h1>
-<p>反映がきちんと行われるかのテスト</p>
-
-    ${f:h(unko)}
-    これで最終確認ジャイ！！！！！！！！！
+<h1>FEELCYCLEバッチ起動確認</h1>
+<p>起動が終了しました</p>
+<p>処理対象リスト</p>
     <c:forEach var="userList" varStatus="s" items="${userList}">
     	<p>${f:h(userList.userId)}</p>
-    	<p>${f:h(userList.userPass)}</p>
-	</c:forEach>
-    
+   	</c:forEach>
 </body>
 </html>

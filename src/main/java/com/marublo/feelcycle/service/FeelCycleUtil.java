@@ -116,6 +116,22 @@ public class FeelCycleUtil {
 
 		return tempStr;
 	}
+	
+	/**
+	 * 文字分割用ユーティリティ
+	 * 10:00〜10:45
+	 * みたいなものを [10:00,10:45]という形で返却する
+	 *
+	 * @param baseStr 変更用元データ
+	 * @return String
+	 *
+	 * 存在していたらtrue 存在していなかったらfalseを返却する
+	 */
+	public static String[] spliteTime(String baseStr){
 
+		String[] spliteArray = baseStr.split("～", 0);
+
+		return spliteArray;
+	}
 
 }
