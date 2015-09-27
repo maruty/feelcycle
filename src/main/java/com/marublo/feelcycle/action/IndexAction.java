@@ -15,17 +15,26 @@
  */
 package com.marublo.feelcycle.action;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.seasar.extension.jdbc.JdbcManager;
+
+import org.apache.http.Header;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicHeader;
 import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.entity.User;
-import com.marublo.feelcycle.entity.UserFeelcycle;
+import com.marublo.feelcycle.service.FeelcycleService;
 import com.marublo.feelcycle.service.UserService;
-import static org.seasar.extension.jdbc.operation.Operations.*;
+
+
+
 
 
 public class IndexAction {
@@ -40,13 +49,47 @@ public class IndexAction {
 	/*************DI*******************/
 	@Resource
 	public UserService userService;
+	
+	@Resource
+	public FeelcycleService feelcycleService;
+	
 	/*************DI*******************/
 	
+	public List<User> userList;
+	
 	public String unko = "";
+	public RequestConfig requestConfig;
 	
     @Execute(validator = false)
 	public String index() {
     	//ユーザー情報の取得
+    	userList = userService.getAllUser();
+    	//これあとでDTOに変える
+    	String getLessonDataDto = "";
+    	
+    	
+    	for(int i=0; i < userList.size(); i++){
+    		for(int j=0; j < userList.get(i).userFeelCycleList.size(); j++){
+    			try {
+					getLessonDataDto = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
+												, userList.get(i).userFeelCycleList.get(j).userPassFeelcycle);
+				} catch (IOException e) {
+					// TODO 自動生成された catch ブロック
+					e.printStackTrace();
+				}
+    			System.out.println(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
+    			//System.out.println(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle);
+    		}
+    		//userオブジェクトを元にログイン
+
+    		
+    		
+    		//getHtml = feelcycleService.getPage("mypage",user);
+    		
+    		
+    		
+    		
+    	}
     	
     	
     	
@@ -62,7 +105,7 @@ public class IndexAction {
   
     	
     	//UserService userService = new UserService();
-    	List<User> a = userService.getAllUser();
+    	
     	
     	
 		//List<User> teuserList = jdbcManager.from(User.class)

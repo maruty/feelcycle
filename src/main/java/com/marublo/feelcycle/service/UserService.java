@@ -12,9 +12,6 @@ import org.seasar.extension.jdbc.JdbcManager;
 
 
 
-import static com.marublo.feelcycle.entity.UserNames.*;
-import static org.seasar.extension.jdbc.operation.Operations.*;
-
 /**
  * {@link User}のサービスクラスです。
  * 
