@@ -23,12 +23,10 @@ import javax.annotation.Resource;
 import javax.xml.xpath.XPathExpressionException;
 
 
-import org.apache.http.Header;
 import org.apache.http.ParseException;
-import org.apache.http.client.HttpClient;
+
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicHeader;
+
 import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.dto.LessonDataDto;
@@ -71,17 +69,19 @@ public class IndexAction {
 	public String index() {
     	//ユーザー情報の取得
     	userList = userService.getAllUser();
-    	//これあとでDTOに変える
-    	List<LessonDataDto> getLessonDataDtoList = new ArrayList();
-    	
+    	List<LessonDataDto> getLessonDataDtoList = new ArrayList<LessonDataDto>();
     	
     	for(int i=0; i < userList.size(); i++){
     		for(int j=0; j < userList.get(i).userFeelCycleList.size(); j++){
     			try {
 					try {
+						//暗号化されたパスワード取得用
+						String feelcycleLoginPassSalt = userService.getSaltedPassword(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle, userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
+						
 						//1ID単位のレッスン履歴情報がくる
 						getLessonDataDtoList = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
-													, userList.get(i).userFeelCycleList.get(j).userPassFeelcycle,userList.get(i).userId);
+													, feelcycleLoginPassSalt
+													,userList.get(i).userId);
 						
 						//セレクトして存在してなかったらインサートする
 						for(LessonDataDto lesson : getLessonDataDtoList){
