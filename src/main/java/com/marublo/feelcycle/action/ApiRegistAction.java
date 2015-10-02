@@ -63,10 +63,21 @@ public class ApiRegistAction {
 	public List<User> userList;
 	
 	public String unko = "";
+	public String loginId = "";
 	public RequestConfig requestConfig;
 	
-    @Execute(validator = false)
+    @Execute(validator = false, urlPattern = "{loginId}")
 	public String index() {
+    	
+    	String unko = loginId;
+    	
         return "index.jsp";
 	}
+    
+    @Execute(validator = false)
+    public String regist(){
+    	
+    	return "regist.jsp";
+    }
+    
 }

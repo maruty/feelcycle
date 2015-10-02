@@ -5,5 +5,7 @@
 </head>
 <body>
 <h1>apiRegist確認</h1>
+
+${unko}
 </body>
 </html>
