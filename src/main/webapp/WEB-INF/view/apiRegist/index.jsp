@@ -6,6 +6,13 @@
 <body>
 <h1>apiRegist確認</h1>
 
-${unko}
+<c:out value="${loginId}" />
+<c:out value="${loginPass}" />
+<c:out value="${nickName}" />
+<c:out value="${feelcycleLoginId1}" />
+<c:out value="${feelcycleLoginPass1}" />
+<c:out value="${feelcycleLoginId2}" />
+<c:out value="${feelcycleLoginPass2}" />
+
 </body>
 </html>
