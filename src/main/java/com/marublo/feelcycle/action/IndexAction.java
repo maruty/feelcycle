@@ -76,7 +76,7 @@ public class IndexAction {
     			try {
 					try {
 						//暗号化されたパスワード取得用
-						//String feelcycleLoginPassSalt = userService.getSaltedPassword(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle, userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
+						String feelcycleLoginPassSalt = userService.getSaltedPassword(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle, userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
 						
 						//1ID単位のレッスン履歴情報がくる
 						getLessonDataDtoList = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
