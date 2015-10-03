@@ -16,6 +16,7 @@
 package com.marublo.feelcycle.action;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,7 +97,17 @@ public class ApiRegistAction {
     	
     	UserDetail userDetail = new UserDetail();
     	userDetail.userId = loginId;
-    	userDetail.nickName = nickName;
+    	
+    	//ニックネームの文字化け対策
+    	String nickEncode = "";
+        try {
+            byte[] byteData = nickName.getBytes("ISO_8859_1");
+            nickEncode = new String(byteData, "URF-8");
+          }catch(UnsupportedEncodingException e){
+        	  
+          }
+    	
+    	userDetail.nickName = nickEncode;
   
     	//feelcycle登録
     	UserFeelcycle userFc1 = new UserFeelcycle();
