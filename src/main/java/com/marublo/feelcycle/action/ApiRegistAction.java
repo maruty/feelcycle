@@ -152,6 +152,10 @@ public class ApiRegistAction {
     		resultMessage = "false";
     	}
     	
+    	if(loginId.equals("") || loginPass.equals("")){
+    		resultMessage = "false";
+    	}
+    	
     	return "check.jsp";
     }
     
