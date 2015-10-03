@@ -140,16 +140,16 @@ public class ApiRegistAction {
     	
     	return "regist.jsp";
     }
-    
-    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}/")
+    //ログイン情報を返すAPI
+    @Execute(validator = false)
     public String checkUser(){
     	
     	boolean result = userService.getSelectUser(loginId,loginPass);
     	
     	if(result){
-    		resultMessage = "loginOK";
+    		resultMessage = "true";
     	}else{
-    		resultMessage = "loginNG";
+    		resultMessage = "false";
     	}
     	
     	return "check.jsp";
