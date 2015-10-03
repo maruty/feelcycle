@@ -79,7 +79,7 @@ public class ApiRegistAction {
 	public String feelcycleLoginId2 = "";
 	public String feelcycleLoginPass2 = "";
 	
-	public String resultMessage = "";
+	public String resultMessage = "registResult:false";
 	
 	public RequestConfig requestConfig;
 	
