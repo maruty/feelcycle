@@ -7,6 +7,7 @@
 <h1>会員存在チェック確認</h1>
 
 <p>処理結果</p>
+resultMessage:
 <c:out value="${resultMessage}" />
 
 </body>
