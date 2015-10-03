@@ -2,7 +2,7 @@ package com.marublo.feelcycle.service;
 
 import com.marublo.feelcycle.dto.LessonDataDto;
 import com.marublo.feelcycle.entity.Lessson;
-import com.marublo.feelcycle.entity.User;
+
 
 import java.util.List;
 import javax.annotation.Generated;
@@ -10,8 +10,6 @@ import javax.annotation.Resource;
 
 import org.seasar.extension.jdbc.JdbcManager;
 
-import static com.marublo.feelcycle.entity.LesssonNames.*;
-import static org.seasar.extension.jdbc.operation.Operations.*;
 
 /**
  * {@link Lessson}のサービスクラスです。
@@ -59,6 +57,6 @@ public class LesssonService{
 			    jdbcManager
 			        .insert(insertLesson)
 			        .execute();
-		System.out.println("確認");
+		System.out.println("確認" + count);
 	}
 }

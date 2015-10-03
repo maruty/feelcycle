@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 
 /**
@@ -43,4 +44,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy="user")
     public List<UserFeelcycle> userFeelCycleList; 
     
+    //ニックネーム用
+    @OneToOne(mappedBy="user")
+    public UserDetail userDetail;
 }

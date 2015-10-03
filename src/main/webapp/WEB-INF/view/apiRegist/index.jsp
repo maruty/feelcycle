@@ -13,6 +13,8 @@
 <c:out value="${feelcycleLoginPass1}" />
 <c:out value="${feelcycleLoginId2}" />
 <c:out value="${feelcycleLoginPass2}" />
+<p>処理結果</p>
+<c:out value="${resultMessage}" />
 
 </body>
 </html>

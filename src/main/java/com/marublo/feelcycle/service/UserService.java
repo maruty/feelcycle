@@ -30,7 +30,19 @@ public class UserService{
 	//全ユーザー（紐づくFCのログイン情報も含め）取得
 	public List<User> getAllUser(){
 	
-		return jdbcManager.from(User.class).innerJoin("userFeelCycleList").getResultList();
+		return jdbcManager.from(User.class).innerJoin("userFeelCycleList").innerJoin("userDetail").getResultList();
+	}
+	
+	public boolean registUser(User user){
+		
+		int count = jdbcManager.insert(user).execute();
+		//1だったら更新成功
+		
+		if(count == 1){
+			return true;
+		}else{
+			return false;
+		}
 	}
 	
 	//ユーザー登録やDBに値を聞く際にパスワードのハッシュ化を行う

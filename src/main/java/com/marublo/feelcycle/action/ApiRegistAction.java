@@ -32,9 +32,13 @@ import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.dto.LessonDataDto;
 import com.marublo.feelcycle.entity.User;
+import com.marublo.feelcycle.entity.UserDetail;
+import com.marublo.feelcycle.entity.UserFeelcycle;
 import com.marublo.feelcycle.form.ApiRegistForm;
 import com.marublo.feelcycle.service.FeelcycleService;
 import com.marublo.feelcycle.service.LesssonService;
+import com.marublo.feelcycle.service.UserDetailService;
+import com.marublo.feelcycle.service.UserFeelcycleService;
 import com.marublo.feelcycle.service.UserService;
 
 
@@ -56,19 +60,16 @@ public class ApiRegistAction {
 	public UserService userService;
 	
 	@Resource
-	public FeelcycleService feelcycleService;
+	public UserFeelcycleService userFeelcycleService;
 
-	@Resource
-	public LesssonService lesssonService;
 	
-	//public ApiRegistForm apiRegistForm;
+	@Resource
+	public UserDetailService userDetailService;
 	
 	/*************DI*******************/
 	
+	/*************プロパティ*******************/
 	public List<User> userList;
-	
-	
-	
 	public String unko = "";
 	public String loginId = "";
 	public String loginPass = "";
@@ -78,13 +79,56 @@ public class ApiRegistAction {
 	public String feelcycleLoginId2 = "";
 	public String feelcycleLoginPass2 = "";
 	
+	public String resultMessage = "";
+	
 	public RequestConfig requestConfig;
 	
     @Execute(validator = false, urlPattern = "{loginId}/{loginPass}/{nickName}/{feelcycleLoginId1}/{feelcycleLoginPass1}/{feelcycleLoginId2}/{feelcycleLoginPass2}")
 	public String index() {
+    	//FA用のユーザー登録
+    	User user = new User();
+    	user.userId = loginId;
+    	
+    	//FeelAnalyticsのパスワード登録に関しては暗号化をする
+    	String hashPass = userService.getSaltedPassword(loginPass,loginId);
+    	user.userPass = hashPass;
+    	
+    	
+    	UserDetail userDetail = new UserDetail();
+    	userDetail.userId = loginId;
+    	userDetail.nickName = nickName;
+  
+    	//feelcycle登録
+    	UserFeelcycle userFc1 = new UserFeelcycle();
+    	userFc1.userId = loginId;
+    	userFc1.userIdFeelcycle = feelcycleLoginId1;
+    	userFc1.userPassFeelcycle = feelcycleLoginPass1;
+
+    	UserFeelcycle userFc2 = new UserFeelcycle();
+    	//FC2に値が入ってた場合こちらも登録する
+    	if ( feelcycleLoginId2 != null && feelcycleLoginId2.length() > 0 ){
+    		userFc2.userId = loginId;
+    		userFc2.userIdFeelcycle = feelcycleLoginId2;
+    		userFc2.userPassFeelcycle = feelcycleLoginPass2;
+    	}
+    	
+    	if ( feelcycleLoginId2 != null && feelcycleLoginId2.length() > 0 ){
+    		if(userService.registUser(user) && userFeelcycleService.registUser(userFc1) &&
+    				userFeelcycleService.registUser(userFc2) && userDetailService.registUser(userDetail)){
+    			resultMessage = "registResult=true";
+    		}else{
+    			resultMessage = "registResult=false";
+    		}
+    	}else{
+    		if(userService.registUser(user) && userFeelcycleService.registUser(userFc1) && userDetailService.registUser(userDetail)){
+    			resultMessage = "registResult=true";
+    		}else{
+    			resultMessage = "registResult=false";
+    		}
+    	}
     	
     
-        return "index.jsp";
+    	return "index.jsp";
 	}
     
     @Execute(validator = false)

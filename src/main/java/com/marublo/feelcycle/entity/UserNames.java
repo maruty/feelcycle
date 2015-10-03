@@ -1,5 +1,6 @@
 package com.marublo.feelcycle.entity;
 
+import com.marublo.feelcycle.entity.UserDetailNames._UserDetailNames;
 import com.marublo.feelcycle.entity.UserFeelcycleNames._UserFeelcycleNames;
 import javax.annotation.Generated;
 import org.seasar.extension.jdbc.name.PropertyName;
@@ -8,7 +9,7 @@ import org.seasar.extension.jdbc.name.PropertyName;
  * {@link User}のプロパティ名の集合です。
  * 
  */
-@Generated(value = {"S2JDBC-Gen 2.4.46", "org.seasar.extension.jdbc.gen.internal.model.NamesModelFactoryImpl"}, date = "2015/09/25 10:54:21")
+@Generated(value = {"S2JDBC-Gen 2.4.46", "org.seasar.extension.jdbc.gen.internal.model.NamesModelFactoryImpl"}, date = "2015/10/03 11:42:39")
 public class UserNames {
 
     /**
@@ -45,6 +46,15 @@ public class UserNames {
      */
     public static _UserFeelcycleNames userFeelCycleList() {
         return new _UserFeelcycleNames("userFeelCycleList");
+    }
+
+    /**
+     * userDetailのプロパティ名を返します。
+     * 
+     * @return userDetailのプロパティ名
+     */
+    public static _UserDetailNames userDetail() {
+        return new _UserDetailNames("userDetail");
     }
 
     /**
@@ -114,6 +124,15 @@ public class UserNames {
          */
         public _UserFeelcycleNames userFeelCycleList() {
             return new _UserFeelcycleNames(this, "userFeelCycleList");
+        }
+
+        /**
+         * userDetailのプロパティ名を返します。
+         * 
+         * @return userDetailのプロパティ名
+         */
+        public _UserDetailNames userDetail() {
+            return new _UserDetailNames(this, "userDetail");
         }
     }
 }

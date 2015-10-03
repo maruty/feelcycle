@@ -7,7 +7,7 @@ import org.seasar.extension.jdbc.name.PropertyName;
  * {@link Lessson}のプロパティ名の集合です。
  * 
  */
-@Generated(value = {"S2JDBC-Gen 2.4.46", "org.seasar.extension.jdbc.gen.internal.model.NamesModelFactoryImpl"}, date = "2015/09/25 10:54:21")
+@Generated(value = {"S2JDBC-Gen 2.4.46", "org.seasar.extension.jdbc.gen.internal.model.NamesModelFactoryImpl"}, date = "2015/10/03 11:42:39")
 public class LesssonNames {
 
     /**
@@ -81,15 +81,16 @@ public class LesssonNames {
     public static PropertyName<String> lessonTenpo() {
         return new PropertyName<String>("lessonTenpo");
     }
-    
+
     /**
      * lessonMashineのプロパティ名を返します。
      * 
-     * @return lessonTenpoのプロパティ名
+     * @return lessonMashineのプロパティ名
      */
     public static PropertyName<String> lessonMashine() {
         return new PropertyName<String>("lessonMashine");
     }
+
     /**
      * @author S2JDBC-Gen
      */
@@ -194,11 +195,11 @@ public class LesssonNames {
         public PropertyName<String> lessonTenpo() {
             return new PropertyName<String>(this, "lessonTenpo");
         }
-        
+
         /**
-         * lessonTenpoのプロパティ名を返します。
+         * lessonMashineのプロパティ名を返します。
          *
-         * @return lessonTenpoのプロパティ名
+         * @return lessonMashineのプロパティ名
          */
         public PropertyName<String> lessonMashine() {
             return new PropertyName<String>(this, "lessonMashine");

@@ -2,7 +2,6 @@ package com.marublo.feelcycle.service;
 
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,6 @@ import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -45,8 +43,7 @@ public class HtmlGetService{
 	
     private final int SOCKET_TIMEOUT = 4300;
     private final int CONNECTION_TIMEOUT =  4300;
-    private final String USER_AGENT = "feel de yaseru";
-	private RequestConfig requestConfig;
+    private RequestConfig requestConfig;
 	private List<Header> headers = new ArrayList<Header>();
 	private HttpClient httpClient;
 	private HttpPost post;

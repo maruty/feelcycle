@@ -34,6 +34,17 @@ public class UserFeelcycleService extends AbstractService<UserFeelcycle> {
     public UserFeelcycle findById(Integer id) {
         return select().id(id).getSingleResult();
     }
+    
+    public boolean registUser(UserFeelcycle userFeelcycle){
+    	int count = jdbcManager.insert(userFeelcycle).execute();
+		//1だったら更新成功
+		
+		if(count == 1){
+			return true;
+		}else{
+			return false;
+		}
+    }
 
     /**
      * 識別子の昇順ですべてのエンティティを検索します。

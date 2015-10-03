@@ -43,10 +43,10 @@ public class FeelcycleService{
 	/*************DI *******************/
 	private String userId = "";
 	private String html = "";
-	private String parseCode = "";
+
 	private Tidy tidy = new Tidy();
 	private NodeList nodeList;
-	private InputStream loginAfterString;
+
 	private Document doc;
 	private XPath xpath;
 	
@@ -114,9 +114,9 @@ public class FeelcycleService{
 		//キーは利用チケットこれが２つある時は両方が表示しているので２回めの時以降のデータ取得
 		//1個の時は受講履歴のみなので受講履歴をそのまま取得
 		int displayCount = 0;
-		int lessonCount = 0;
+		//int lessonCount = 0;
 		int tempCoutOne = 0;
-		int tempCountTwo= 0;
+		//int tempCountTwo= 0;
 		int tempCountTwoDisplayCount = 0;
 		for(String s : tempLessonList){
 			if(s.equals("利用チケット")){
