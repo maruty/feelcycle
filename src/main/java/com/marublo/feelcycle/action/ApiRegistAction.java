@@ -141,4 +141,18 @@ public class ApiRegistAction {
     	return "regist.jsp";
     }
     
+    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}/")
+    public String checkUser(){
+    	
+    	boolean result = userService.getSelectUser(loginId,loginPass);
+    	
+    	if(result){
+    		resultMessage = "loginOK";
+    	}else{
+    		resultMessage = "loginNG";
+    	}
+    	
+    	return "check.jsp";
+    }
+    
 }

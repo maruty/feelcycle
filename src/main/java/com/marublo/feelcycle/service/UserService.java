@@ -1,5 +1,6 @@
 package com.marublo.feelcycle.service;
 
+import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.User;
 
 
@@ -73,5 +74,18 @@ public class UserService{
 	  }
 	 
 	    return buf.toString();
+	}
+
+	public boolean getSelectUser(String loginId, String loginPass) {
+		String hashPass = getSaltedPassword(loginPass,loginId);
+		
+		List<User> result = jdbcManager.from(User.class).where("userId = ? and userPass = ?", 
+																loginId,hashPass)
+				.getResultList();
+		if(result.size() > 0){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
