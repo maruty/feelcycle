@@ -195,8 +195,7 @@ public class ApiRegistAction {
     			json = json + ",";
     			
     		}else{
-    			json = json +"]"
-    						+ "";
+    			json = json +"]";
     		}
 
     		
