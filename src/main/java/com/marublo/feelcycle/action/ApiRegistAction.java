@@ -183,13 +183,13 @@ public class ApiRegistAction {
         			+ "\"lesson\":[";
     	
     	for(int i=0;i < resultList.size(); i++){
-    		json = json + "{ \"lessonDate\":" + resultList.get(i).lessonDate +","
-    					+   "\"lessonTimeFrom\":" + resultList.get(i).lessonTimeFrom + ","
-    					+   "\"lessonTimeTo\":"   + resultList.get(i).lessonTimeTo + ","
-    					+	"\"lessonName\":"     + resultList.get(i).lessonName + ","
-    					+   "\"instructor\":"     + resultList.get(i).instructor + ","
-    					+   "\"lessonTenpo\":"    + resultList.get(i).lessonTenpo + ","
-    					+   "\"lessonMashine\":"  + resultList.get(i).lessonMashine
+    		json = json + "{ \"lessonDate\":\"" + resultList.get(i).lessonDate +"\","
+    					+   "\"lessonTimeFrom\":\"" + resultList.get(i).lessonTimeFrom + "\","
+    					+   "\"lessonTimeTo\":\""   + resultList.get(i).lessonTimeTo + "\","
+    					+	"\"lessonName\":\""     + resultList.get(i).lessonName + "\","
+    					+   "\"instructor\":\""     + resultList.get(i).instructor + "\","
+    					+   "\"lessonTenpo\":\""    + resultList.get(i).lessonTenpo + "\","
+    					+   "\"lessonMashine\":\""  + resultList.get(i).lessonMashine + "\""
     					+ "}";
     		if(i != resultList.size()-1){
     			json = json + ",";
