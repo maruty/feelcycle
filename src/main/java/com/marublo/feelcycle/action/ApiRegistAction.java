@@ -180,7 +180,7 @@ public class ApiRegistAction {
     	//jsonで文字列返す
     	
     	json = json + "{"
-        			+ "\"lesson\":[";
+        			+ "[";
     	
     	for(int i=0;i < resultList.size(); i++){
     		json = json + "{ \"lessonDate\":\"" + resultList.get(i).lessonDate +"\","
