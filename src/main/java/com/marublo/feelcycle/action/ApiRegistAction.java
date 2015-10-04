@@ -182,7 +182,7 @@ public class ApiRegistAction {
     	json = json + ""
         			+ "[";
     	
-    	for(int i=0;i < resultList.size(); i++){
+    	for(int i=4;i < resultList.size(); i++){
     		json = json + "{ \"lessonDate\":\"" + resultList.get(i).lessonDate +"\","
     					+   "\"lessonTimeFrom\":\"" + resultList.get(i).lessonTimeFrom + "\","
     					+   "\"lessonTimeTo\":\""   + resultList.get(i).lessonTimeTo + "\","
