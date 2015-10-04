@@ -179,7 +179,7 @@ public class ApiRegistAction {
     	
     	//jsonで文字列返す
     	
-    	json = json + "{"
+    	json = json + ""
         			+ "[";
     	
     	for(int i=0;i < resultList.size(); i++){
@@ -196,7 +196,7 @@ public class ApiRegistAction {
     			
     		}else{
     			json = json +"]"
-    						+ "}";
+    						+ "";
     		}
 
     		
