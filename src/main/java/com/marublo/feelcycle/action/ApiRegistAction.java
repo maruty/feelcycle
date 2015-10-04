@@ -148,7 +148,7 @@ public class ApiRegistAction {
     	return "regist.jsp";
     }
     //ログイン情報を返すAPI
-    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}")
+    @Execute(validator = false)
     public String checkUser(){
     	
     	boolean result = userService.getSelectUser(loginId,loginPass);
