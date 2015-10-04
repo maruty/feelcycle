@@ -1,5 +1,6 @@
 package com.marublo.feelcycle.service;
 
+import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.UserFeelcycle;
 import java.util.List;
 import javax.annotation.Generated;
@@ -54,4 +55,5 @@ public class UserFeelcycleService extends AbstractService<UserFeelcycle> {
     public List<UserFeelcycle> findAllOrderById() {
         return select().orderBy(asc(id())).getResultList();
     }
+
 }

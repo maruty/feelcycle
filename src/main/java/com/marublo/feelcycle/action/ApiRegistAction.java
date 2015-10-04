@@ -32,6 +32,7 @@ import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.dto.LessonDataDto;
+import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.User;
 import com.marublo.feelcycle.entity.UserDetail;
 import com.marublo.feelcycle.entity.UserFeelcycle;
@@ -62,6 +63,10 @@ public class ApiRegistAction {
 	
 	@Resource
 	public UserFeelcycleService userFeelcycleService;
+	
+	
+	@Resource
+	public LesssonService lesssonService;
 
 	
 	@Resource
@@ -79,8 +84,10 @@ public class ApiRegistAction {
 	public String feelcycleLoginPass1 = "";
 	public String feelcycleLoginId2 = "";
 	public String feelcycleLoginPass2 = "";
+	public String json = "";
 	
 	public String resultMessage = "registResult:false";
+	public List<Lessson> resultList;
 	
 	public RequestConfig requestConfig;
 	
@@ -141,7 +148,7 @@ public class ApiRegistAction {
     	return "regist.jsp";
     }
     //ログイン情報を返すAPI
-    @Execute(validator = false)
+    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}")
     public String checkUser(){
     	
     	boolean result = userService.getSelectUser(loginId,loginPass);
@@ -158,5 +165,45 @@ public class ApiRegistAction {
     	
     	return "check.jsp";
     }
+    
+    
+    //ログイン情報を返すAPI
+    @Execute(validator = false)
+    public String getLesson(){
+    	
+    	Lessson lessson = new Lessson();
+    	lessson.userId = loginId;
+    	json = "";
+    	resultList = new ArrayList<Lessson>();
+    	resultList = lesssonService.getLessonData(lessson);
+    	
+    	//jsonで文字列返す
+    	
+    	json = json + "{"
+        			+ "\"lesson\":[";
+    	
+    	for(int i=0;i < resultList.size(); i++){
+    		json = json + "{ \"lessonDate\":" + resultList.get(i).lessonDate +","
+    					+   "\"lessonTimeFrom\":" + resultList.get(i).lessonTimeFrom + ","
+    					+   "\"lessonTimeTo\":"   + resultList.get(i).lessonTimeTo + ","
+    					+	"\"lessonName\":"     + resultList.get(i).lessonName + ","
+    					+   "\"instructor\":"     + resultList.get(i).instructor + ","
+    					+   "\"lessonTenpo\":"    + resultList.get(i).lessonTenpo + ","
+    					+   "\"lessonMashine\":"  + resultList.get(i).lessonMashine
+    					+ "}";
+    		if(i != resultList.size()-1){
+    			json = json + ",";
+    			
+    		}else{
+    			json = json +"]"
+    						+ "}";
+    		}
+
+    		
+    	}
+
+		return "lesson.jsp";
+    }
+ 
     
 }

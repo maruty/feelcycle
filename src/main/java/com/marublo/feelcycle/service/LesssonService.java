@@ -57,6 +57,14 @@ public class LesssonService{
 			    jdbcManager
 			        .insert(insertLesson)
 			        .execute();
-		System.out.println("確認" + count);
+		//System.out.println("確認" + count);
+	}
+	public List<Lessson> getLessonData(Lessson lessson) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+		List<Lessson> result = jdbcManager.from(Lessson.class).where("userId = ? ", lessson.userId).getResultList();
+		
+		
+		return result;
 	}
 }

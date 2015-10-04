@@ -107,7 +107,7 @@ public class FeelcycleService{
 		for(int j=0; j < nodeList.getLength(); j++){
 			org.w3c.dom.Node TagNode =  nodeList.item(j);
 			tempLessonList.add(TagNode.getNodeValue().toString());
-			System.out.println(TagNode.getNodeValue().toString());
+			//System.out.println(TagNode.getNodeValue().toString());
 		}
 		
 		//個数をカウントして予約状況画面と受講履歴にデータがあるのか、　受講履歴なのかの判断をする

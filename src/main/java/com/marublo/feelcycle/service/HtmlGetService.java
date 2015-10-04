@@ -57,16 +57,7 @@ public class HtmlGetService{
 
 	
 	HtmlGetService(){
-		this.requestConfig = RequestConfig.custom()
-	             .setConnectTimeout(CONNECTION_TIMEOUT)
-	             .setSocketTimeout(SOCKET_TIMEOUT)
-	             .build();
-		this.headers.add(new BasicHeader("Accept-Charset","utf-8"));
-		this.headers.add(new BasicHeader("Accept-Language","ja, en;q=0.8"));
 
-		this.httpClient = HttpClientBuilder.create()
-                .setDefaultRequestConfig(requestConfig)
-                .setDefaultHeaders(headers).build();	
 	}
 	
 	//ユーザーIDを返します
@@ -77,6 +68,22 @@ public class HtmlGetService{
 	public void gethtmlInit(String userIdFeelcycle, String userPassFeelcycle) throws IOException, IOException {
 		// TODO 自動生成されたメソッド・スタブ
 		  // configurations
+		
+		//requestConfig = new RequestConfig();
+		headers = new ArrayList<Header>();
+		this.requestConfig = RequestConfig.custom()
+	             .setConnectTimeout(CONNECTION_TIMEOUT)
+	             .setSocketTimeout(SOCKET_TIMEOUT)
+	             .build();
+		this.headers.add(new BasicHeader("Accept-Charset","utf-8"));
+		this.headers.add(new BasicHeader("Accept-Language","ja, en;q=0.8"));
+
+		this.httpClient = HttpClientBuilder.create()
+               .setDefaultRequestConfig(requestConfig)
+               .setDefaultHeaders(headers).build();	
+		
+		
+		params = new ArrayList<NameValuePair>();
 		this.userIdFeelcycle = userIdFeelcycle;
 		this.userPassFeelcycle = userPassFeelcycle;
 		this.FS_COOKIE = FeelCycleUtil.getFsCookie(this.userIdFeelcycle,this.userPassFeelcycle);
@@ -99,6 +106,7 @@ public class HtmlGetService{
 				this.accessUrl = "";
 				break;
 		}
+		post = new HttpPost();
 		this.post = new HttpPost(this.accessUrl);
 	    this.post.setEntity(new UrlEncodedFormEntity(params,"UTF-8"));
 	    this.response = this.httpClient.execute(this.post);

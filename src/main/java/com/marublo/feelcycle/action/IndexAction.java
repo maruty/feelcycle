@@ -76,7 +76,7 @@ public class IndexAction {
     			try {
 					try {
 						//暗号化されたパスワード取得用
-						String feelcycleLoginPassSalt = userService.getSaltedPassword(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle, userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
+						//String feelcycleLoginPassSalt = userService.getSaltedPassword(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle, userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
 						
 						//1ID単位のレッスン履歴情報がくる
 						getLessonDataDtoList = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
@@ -88,7 +88,7 @@ public class IndexAction {
 							if(lesssonService.checkLessonData(lesson)){
 								//trueだったら存在していないのでインサートする
 								lesssonService.insertLessonData(lesson);
-								System.out.println("確認");
+								//System.out.println("確認");
 							}else{
 								//falseだったら存在してないのでインサートしない
 								
@@ -103,18 +103,10 @@ public class IndexAction {
 					// TODO 自動生成された catch ブロック
 					e.printStackTrace();
 				}
-    			System.out.println(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
+    			//System.out.println(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
     			//System.out.println(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle);
     		}
-    		//userオブジェクトを元にログイン
-
-    		
-    		
-    		//getHtml = feelcycleService.getPage("mypage",user);
-    		
-    		
-    		
-    		
+    		getLessonDataDtoList = new ArrayList<LessonDataDto>();
     	}
     	
     	
