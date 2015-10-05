@@ -156,7 +156,7 @@ public class ApiRegistAction {
     }
     
     //ログイン情報を返すAPI
-    @Execute(validator = false)
+    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}")
     public String getUserData(){
     	
     	User user = new User();
@@ -167,6 +167,7 @@ public class ApiRegistAction {
     	json = "";
     	List<User> userResult = new ArrayList<User>();
     	//userList = new ArrayList<User>();
+    	
     	
     	userResult = userService.getUser(user);
     	

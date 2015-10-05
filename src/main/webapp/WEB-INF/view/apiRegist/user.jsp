@@ -1,1 +1,1 @@
-<c:out value="${json}" />test
+<c:out value="${json}" />
