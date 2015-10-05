@@ -15,29 +15,21 @@
  */
 package com.marublo.feelcycle.action;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.xml.xpath.XPathExpressionException;
 
-
-import org.apache.http.ParseException;
 
 import org.apache.http.client.config.RequestConfig;
 
-import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
-import com.marublo.feelcycle.dto.LessonDataDto;
 import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.User;
 import com.marublo.feelcycle.entity.UserDetail;
 import com.marublo.feelcycle.entity.UserFeelcycle;
-import com.marublo.feelcycle.form.ApiRegistForm;
-import com.marublo.feelcycle.service.FeelcycleService;
 import com.marublo.feelcycle.service.LesssonService;
 import com.marublo.feelcycle.service.UserDetailService;
 import com.marublo.feelcycle.service.UserFeelcycleService;
@@ -187,7 +179,7 @@ public class ApiRegistAction {
 
     	//いったん共通化をlesson.jspで処理する（微妙）
     	//System.out.println("");
-    	return "lesson.jsp";
+    	return "user.jsp";
     }
     
     
