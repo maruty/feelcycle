@@ -186,7 +186,7 @@ public class ApiRegistAction {
     				+   "\"userNickName\":\"" +  userResult.get(0).userDetail.nickName +"\"}";
 
     	//いったん共通化をlesson.jspで処理する（微妙）
-    	System.out.println("");
+    	//System.out.println("");
     	return "lesson.jsp";
     }
     
