@@ -53,8 +53,6 @@ public class ApiRegistAction {
 	@Resource
 	public UserService userService;
 	
-	@Resource
-	public UserService userGetDetailService;
 	
 	@Resource
 	public UserFeelcycleService userFeelcycleService;
@@ -137,11 +135,7 @@ public class ApiRegistAction {
     	return "index.jsp";
 	}
     
-    @Execute(validator = false)
-    public String regist(){
-    	
-    	return "regist.jsp";
-    }
+
     //ログイン情報を返すAPI
     @Execute(validator = false)
     public String checkUser(){
@@ -174,7 +168,7 @@ public class ApiRegistAction {
     	List<User> userResult = new ArrayList<User>();
     	//userList = new ArrayList<User>();
     	
-    	userResult = userGetDetailService.getUser(user);
+    	userResult = userService.getUser(user);
     	
     	json = "";
     	json = json + "{\"userId\":\"" +  userResult.get(0).userId +"\","
