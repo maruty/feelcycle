@@ -166,8 +166,31 @@ public class ApiRegistAction {
     	return "check.jsp";
     }
     
-    
     //ログイン情報を返すAPI
+    @Execute(validator = false)
+    public String getUserData(){
+    	
+    	User user = new User();
+    	user.userId = loginId;
+    	user.userPass = loginPass;
+    	
+    	
+    	json = "";
+    	User userResult = new User();
+    	//userList = new ArrayList<User>();
+    	
+    	userResult = userService.getUser(user);
+    	
+    	json = "";
+    	json = json + "{\"userId\":\"" +  userResult.userId +"\""
+    				+   "\"userNickName\":\"" +  userResult.userDetail.nickName +"\"}";
+    	
+    	//いったん共通化をlesson.jspで処理する（微妙）
+    	return "lesson.jsp";
+    }
+    
+    
+    //ログイン情報を返すAPI（レッスン情報）
     @Execute(validator = false)
     public String getLesson(){
     	

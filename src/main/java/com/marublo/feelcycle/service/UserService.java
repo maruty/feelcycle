@@ -34,6 +34,15 @@ public class UserService{
 		return jdbcManager.from(User.class).innerJoin("userFeelCycleList").innerJoin("userDetail").getResultList();
 	}
 	
+	//ユーザーリスト取得
+	public User getUser(User user){
+		User result = jdbcManager.from(User.class).where("userId = ? and userPass = ?", 
+				user.userId,user.userPass).getSingleResult();
+
+		return result;
+	}
+	
+	
 	public boolean registUser(User user){
 		
 		int count = jdbcManager.insert(user).execute();
