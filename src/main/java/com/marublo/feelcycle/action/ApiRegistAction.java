@@ -182,7 +182,7 @@ public class ApiRegistAction {
     	userResult = userService.getUser(user);
     	
     	json = "";
-    	json = json + "{\"userId\":\"" +  userResult.get(0).userId +"\""
+    	json = json + "{\"userId\":\"" +  userResult.get(0).userId +"\","
     				+   "\"userNickName\":\"" +  userResult.get(0).userDetail.nickName +"\"}";
 
     	//いったん共通化をlesson.jspで処理する（微妙）
