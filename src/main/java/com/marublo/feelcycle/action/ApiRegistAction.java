@@ -176,16 +176,17 @@ public class ApiRegistAction {
     	
     	
     	json = "";
-    	User userResult = new User();
+    	List<User> userResult = new ArrayList<User>();
     	//userList = new ArrayList<User>();
     	
     	userResult = userService.getUser(user);
     	
     	json = "";
-    	json = json + "{\"userId\":\"" +  userResult.userId +"\""
-    				+   "\"userNickName\":\"" +  userResult.userDetail.nickName +"\"}";
-    	
+    	json = json + "{\"userId\":\"" +  userResult.get(0).userId +"\""
+    				+   "\"userNickName\":\"" +  userResult.get(0).userDetail.nickName +"\"}";
+
     	//いったん共通化をlesson.jspで処理する（微妙）
+    	System.out.println("");
     	return "lesson.jsp";
     }
     

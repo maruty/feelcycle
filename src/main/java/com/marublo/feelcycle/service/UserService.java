@@ -35,10 +35,11 @@ public class UserService{
 	}
 	
 	//ユーザーリスト取得
-	public User getUser(User user){
-		User result = jdbcManager.from(User.class).where("userId = ? and userPass = ?", 
-				user.userId,user.userPass).getSingleResult();
-
+	public List<User> getUser(User user){
+		String hashPass = getSaltedPassword(user.userPass,user.userId);
+		List<User> result = jdbcManager.from(User.class).innerJoin("userDetail").where("userId = ? and userPass = ?", 
+				user.userId,hashPass).getResultList();
+		System.out.println("");
 		return result;
 	}
 	
