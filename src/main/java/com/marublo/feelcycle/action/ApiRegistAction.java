@@ -54,6 +54,9 @@ public class ApiRegistAction {
 	public UserService userService;
 	
 	@Resource
+	public UserService userGetDetailService;
+	
+	@Resource
 	public UserFeelcycleService userFeelcycleService;
 	
 	
@@ -171,7 +174,7 @@ public class ApiRegistAction {
     	List<User> userResult = new ArrayList<User>();
     	//userList = new ArrayList<User>();
     	
-    	userResult = userService.getUser(user);
+    	userResult = userGetDetailService.getUser(user);
     	
     	json = "";
     	json = json + "{\"userId\":\"" +  userResult.get(0).userId +"\","
