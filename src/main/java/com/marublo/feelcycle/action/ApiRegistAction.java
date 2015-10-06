@@ -24,12 +24,14 @@ import javax.annotation.Resource;
 
 import org.apache.http.client.config.RequestConfig;
 
+import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
 import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.User;
 import com.marublo.feelcycle.entity.UserDetail;
 import com.marublo.feelcycle.entity.UserFeelcycle;
+import com.marublo.feelcycle.form.ApiRegistForm;
 import com.marublo.feelcycle.service.LesssonService;
 import com.marublo.feelcycle.service.UserDetailService;
 import com.marublo.feelcycle.service.UserFeelcycleService;
@@ -50,6 +52,11 @@ public class ApiRegistAction {
 	 */
 	
 	/*************DI*******************/
+	@ActionForm
+	@Resource
+	public ApiRegistForm apiRegistForm;
+	
+	
 	@Resource
 	public UserService userService;
 	
@@ -65,58 +72,64 @@ public class ApiRegistAction {
 	@Resource
 	public UserDetailService userDetailService;
 	
+	
+
+	
 	/*************DI*******************/
 	
 	/*************プロパティ*******************/
-	public List<User> userList;
-	public String unko = "";
-	public String loginId = "";
-	public String loginPass = "";
-	public String nickName = "";
-	public String feelcycleLoginId1 = "";
-	public String feelcycleLoginPass1 = "";
-	public String feelcycleLoginId2 = "";
-	public String feelcycleLoginPass2 = "";
-	public String json = "";
+	//public List<User> userList;
+	//public String unko = "";
+	//public String loginId = "";
+	//public String loginPass = "";
+	//public String nickName = "";
+	//public String feelcycleLoginId1 = "";
+	//public String feelcycleLoginPass1 = "";
+	//public String feelcycleLoginId2 = "";
+	//public String feelcycleLoginPass2 = "";
+	//public String json = "";
+	
+	//public String resultMessage = "registResult:false";
+	//public List<Lessson> resultList;
+	
+	//public RequestConfig requestConfig;
 	
 	public String resultMessage = "registResult:false";
-	public List<Lessson> resultList;
+	public String json = "";
 	
-	public RequestConfig requestConfig;
-	
-    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}/{nickName}/{feelcycleLoginId1}/{feelcycleLoginPass1}/{feelcycleLoginId2}/{feelcycleLoginPass2}")
+    @Execute(validator = false)
 	public String index() {
     	//FA用のユーザー登録
     	User user = new User();
-    	user.userId = loginId;
+    	user.userId = apiRegistForm.loginId;
     	
     	//FeelAnalyticsのパスワード登録に関しては暗号化をする
-    	String hashPass = userService.getSaltedPassword(loginPass,loginId);
+    	String hashPass = userService.getSaltedPassword(apiRegistForm.loginPass,apiRegistForm.loginId);
     	user.userPass = hashPass;
     	
     	
     	UserDetail userDetail = new UserDetail();
-    	userDetail.userId = loginId;
+    	userDetail.userId = apiRegistForm.loginId;
     	
 
     	
-    	userDetail.nickName = nickName;
+    	userDetail.nickName = apiRegistForm.nickName;
   
     	//feelcycle登録
     	UserFeelcycle userFc1 = new UserFeelcycle();
-    	userFc1.userId = loginId;
-    	userFc1.userIdFeelcycle = feelcycleLoginId1;
-    	userFc1.userPassFeelcycle = feelcycleLoginPass1;
+    	userFc1.userId = apiRegistForm.loginId;
+    	userFc1.userIdFeelcycle = apiRegistForm.feelcycleLoginId1;
+    	userFc1.userPassFeelcycle = apiRegistForm.feelcycleLoginPass1;
 
     	UserFeelcycle userFc2 = new UserFeelcycle();
     	//FC2に値が入ってた場合こちらも登録する
-    	if ( feelcycleLoginId2 != null && feelcycleLoginId2.length() > 0 ){
-    		userFc2.userId = loginId;
-    		userFc2.userIdFeelcycle = feelcycleLoginId2;
-    		userFc2.userPassFeelcycle = feelcycleLoginPass2;
+    	if ( apiRegistForm.feelcycleLoginId2 != null && apiRegistForm.feelcycleLoginId2.length() > 0 ){
+    		userFc2.userId = apiRegistForm.loginId;
+    		userFc2.userIdFeelcycle = apiRegistForm.feelcycleLoginId2;
+    		userFc2.userPassFeelcycle = apiRegistForm.feelcycleLoginPass2;
     	}
-    	
-    	if ( feelcycleLoginId2 != null && feelcycleLoginId2.length() > 0 ){
+    	//String resultMessage = "registResult:false";
+    	if ( apiRegistForm.feelcycleLoginId2 != null && apiRegistForm.feelcycleLoginId2.length() > 0 ){
     		if(userService.registUser(user) && userFeelcycleService.registUser(userFc1) &&
     				userFeelcycleService.registUser(userFc2) && userDetailService.registUser(userDetail)){
     			resultMessage = "registResult=true";
@@ -140,7 +153,7 @@ public class ApiRegistAction {
     @Execute(validator = false)
     public String checkUser(){
     	
-    	boolean result = userService.getSelectUser(loginId,loginPass);
+    	boolean result = userService.getSelectUser(apiRegistForm.loginId,apiRegistForm.loginPass);
     	
     	if(result){
     		resultMessage = "true";
@@ -148,7 +161,7 @@ public class ApiRegistAction {
     		resultMessage = "false";
     	}
     	
-    	if(loginId.equals("") || loginPass.equals("")){
+    	if(apiRegistForm.loginId.equals("") || apiRegistForm.loginPass.equals("")){
     		resultMessage = "false";
     	}
     	
@@ -156,15 +169,15 @@ public class ApiRegistAction {
     }
     
     //ログイン情報を返すAPI
-    @Execute(validator = false, urlPattern = "{loginId}/{loginPass}")
-    public String getUserData(){
+    @Execute(validator = false)
+    public String UserData(){
     	
     	User user = new User();
-    	user.userId = loginId;
-    	user.userPass = loginPass;
+    	user.userId = apiRegistForm.loginId;
+    	user.userPass = apiRegistForm.loginPass;
     	
     	
-    	json = "";
+    	
     	List<User> userResult = new ArrayList<User>();
     	//userList = new ArrayList<User>();
     	
@@ -183,12 +196,12 @@ public class ApiRegistAction {
     
     //ログイン情報を返すAPI（レッスン情報）
     @Execute(validator = false)
-    public String getLesson(){
+    public String Lesson(){
     	
     	Lessson lessson = new Lessson();
-    	lessson.userId = loginId;
-    	json = "";
-    	resultList = new ArrayList<Lessson>();
+    	lessson.userId = apiRegistForm.loginId;
+    	
+    	List<Lessson>resultList = new ArrayList<Lessson>();
     	resultList = lesssonService.getLessonData(lessson);
     	
     	//jsonで文字列返す

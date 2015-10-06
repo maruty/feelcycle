@@ -15,31 +15,22 @@
  */
 package com.marublo.feelcycle.form;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Resource;
-import javax.xml.xpath.XPathExpressionException;
-
-
-import org.apache.http.ParseException;
-
-import org.apache.http.client.config.RequestConfig;
-
-import org.seasar.struts.annotation.Execute;
-
-import com.marublo.feelcycle.dto.LessonDataDto;
-import com.marublo.feelcycle.entity.User;
-import com.marublo.feelcycle.service.FeelcycleService;
-import com.marublo.feelcycle.service.LesssonService;
-import com.marublo.feelcycle.service.UserService;
-
 
 
 
 
 public class ApiRegistForm {
 
-    //public String loginId;
+	public String loginId;
+	public String loginPass;
+	public String nickName;
+	public String feelcycleLoginId1;
+	public String feelcycleLoginPass1;
+	public String feelcycleLoginId2;
+	public String feelcycleLoginPass2;
+	
+	
+	
+	
+	
 }
