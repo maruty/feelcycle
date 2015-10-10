@@ -77,7 +77,7 @@ public class LesssonService{
 		
 		List<Lessson> result = jdbcManager.selectBySql(Lessson.class,
 														"select * where USER_ID = ? AND LESSON_DATE LILE ?", 
-														lessson.userId, '%' + year + "/" + month + "/" +  '%').getResultList();
+														lessson.userId,  year + "/" + month + "/" +  '%').getResultList();
 		//SELECT * FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com' AND LESSON_DATE LIKE '2015/10/%'; 
 		
 		return result;
