@@ -1,14 +1,15 @@
 package com.marublo.feelcycle.service;
 
-import com.marublo.feelcycle.dto.LessonDataDto;
-import com.marublo.feelcycle.entity.Lessson;
-
-
+import java.util.Calendar;
 import java.util.List;
+
 import javax.annotation.Generated;
 import javax.annotation.Resource;
 
 import org.seasar.extension.jdbc.JdbcManager;
+
+import com.marublo.feelcycle.dto.LessonDataDto;
+import com.marublo.feelcycle.entity.Lessson;
 
 
 /**
@@ -64,6 +65,20 @@ public class LesssonService{
 		
 		List<Lessson> result = jdbcManager.from(Lessson.class).where("userId = ? ", lessson.userId).getResultList();
 		
+		
+		return result;
+	}
+	public List<Lessson> getLessonDataMonthly(Lessson lessson) {
+		// TODO 自動生成されたメソッド・スタブ
+		//今月の日付取得
+		Calendar cal = 	Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		
+		List<Lessson> result = jdbcManager.selectBySql(Lessson.class,
+														"select * where USER_ID = ? AND LESSON_DATE LILE ?", 
+														lessson.userId, '%' + year + "/" + month + "/" +  '%').getResultList();
+		//SELECT * FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com' AND LESSON_DATE LIKE '2015/10/%'; 
 		
 		return result;
 	}

@@ -231,6 +231,41 @@ public class ApiRegistAction {
 
 		return "lesson.jsp";
     }
- 
+    
+    //ログイン情報を返すAPI（月のレッスン情報）
+    @Execute(validator = false)
+    public String LessonMonthlyData(){
+    	Lessson lessson = new Lessson();
+    	lessson.userId = apiRegistForm.loginId;
+    	
+    	List<Lessson>resultList = new ArrayList<Lessson>();
+    	resultList = lesssonService.getLessonDataMonthly(lessson);
+    	
+    	//jsonで文字列返す
+    	
+    	json = json + ""
+        			+ "[";
+    	
+    	for(int i=0; i < resultList.size(); i++){
+    		json = json + "{\"lessonDate\":\"" + resultList.get(i).lessonDate +"\","
+    					+   "\"lessonTimeFrom\":\"" + resultList.get(i).lessonTimeFrom + "\","
+    					+   "\"lessonTimeTo\":\""   + resultList.get(i).lessonTimeTo + "\","
+    					+	"\"lessonName\":\""     + resultList.get(i).lessonName + "\","
+    					+   "\"instructor\":\""     + resultList.get(i).instructor + "\","
+    					+   "\"lessonTenpo\":\""    + resultList.get(i).lessonTenpo + "\","
+    					+   "\"lessonMashine\":\""  + resultList.get(i).lessonMashine + "\""
+    					+ "}";
+    		if(i != resultList.size()-1){
+    			json = json + ",";
+    			
+    		}else{
+    			json = json +"]"
+    						+ "";
+    		}
+
+    		
+    	}
+    	return "lesson.jsp";
+    }
     
 }
