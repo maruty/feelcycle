@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Generated;
 import javax.annotation.Resource;
@@ -192,14 +194,32 @@ public class FeelcycleService{
 				//変換ミスのバリデーションを後でいれること
 				String timeArray[] = new String[1];
 				timeArray = FeelCycleUtil.spliteTime(tempLessonListCancelPerge.get(i));
-				lessonDataDto.setLessonTimeFrom(timeArray[0]);
-				lessonDataDto.setLessonTimeTo(timeArray[1]);
+				//なんか時間が拾えないパターンがあるみたい=> 座席空問題でindexがずれただけ
+				
+				//System.out.println(lessonDataDto.getLessonUserId() + timeArray[0] + ":" + timeArray[1] );
+				
+				if((timeArray[0] != null && timeArray[0] != "") && (timeArray[1] != null && timeArray[1] != "")){
+					lessonDataDto.setLessonTimeFrom(timeArray[0]);
+					lessonDataDto.setLessonTimeTo(timeArray[1]);
+				}
 				break;
 			case 2:
 				lessonDataDto.setLessonTenpo(tempLessonListCancelPerge.get(i));
 				break;
 			case 3:
-				lessonDataDto.setLessonMashine(tempLessonListCancelPerge.get(i));
+				boolean sheetFlag = false;
+			    try {
+			        Integer.parseInt(tempLessonListCancelPerge.get(i));
+			        sheetFlag = true;
+			        } catch (NumberFormatException e) {
+		        	sheetFlag = false;
+			    }
+				
+				if(sheetFlag){
+					lessonDataDto.setLessonMashine(tempLessonListCancelPerge.get(i));
+				}else{
+					tempLessonListCancelPerge.add(i, "");
+				}
 				break;
 			case 4:
 				lessonDataDto.setLessonName(tempLessonListCancelPerge.get(i));
@@ -208,6 +228,17 @@ public class FeelcycleService{
 				lessonDataDto.setLessonInstructor(tempLessonListCancelPerge.get(i));
 				break;
 			case 6:
+				//チケットメンバーが空の場合配列indexが狂うのでインストラクターの後続が2015/****だったらチケットが空ということでそこでindex追加処理を行う
+				
+				//String str = "2009year";
+				String regex = "\\d{4}/\\d{1,2}/\\d{1,2}.*";
+				Pattern p = Pattern.compile(regex);
+
+				Matcher m = p.matcher(tempLessonListCancelPerge.get(i));
+				if (m.find()){
+					tempLessonListCancelPerge.add(i,"");
+				}
+				
 				lessonDataDtoList.add(lessonDataDto);
 				lessonDataDto = new LessonDataDto();
 				break;
