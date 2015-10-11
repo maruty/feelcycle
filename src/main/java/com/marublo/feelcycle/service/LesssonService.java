@@ -88,21 +88,41 @@ public class LesssonService{
 	}
 	
 	
-	public List<ShukeiDataDto> shukeiData(Lessson lessson) {
+	public List<String> shukeiData(Lessson lessson) {
 		//SELECT LESSON_NAME  FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com' GROUP BY LESSON_NAME ORDER BY COUNT(*) DESC;	
 		//SELECT LESSON_NAME , COUNT(*) AS COUNT_NUMBER FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com'  GROUP BY LESSON_NAME ORDER BY COUNT(*) DESC
 		List<ShukeiDataDto> shukeiDataDtoList = new ArrayList();
 		List<String> tempList = new ArrayList<>();
 		System.out.println("");
 		//多く受講しているレッスン名取得
-		//List<Lessson> lessonData = getLessonData(lessson);
+		List<String> result = jdbcManager.selectBySql(String.class,
+				"SELECT LESSON_NAME , MAX(CO) FROM (SELECT LESSON_NAME, COUNT(*) AS CO FROM LESSSON WHERE USER_ID = ? GROUP BY LESSON_NAME) AS C  GROUP BY C.CO ORDER BY CO DESC",
+				lessson.userId).getResultList();
+				
 		
+		//forでまわして一番多い回数が変わるまでaddする
+		//for(Lessson lesson : result)
 		
-		
-		
+
 		System.out.println("");
-		return null;
+		return result;
 	}
+	
+	public List<String> shukeiInstructorData(Lessson lesson){
+		//List<ShukeiDataDto> shukeiDataDtoList = new ArrayList();
+		List<String> tempList = new ArrayList<>();
+		System.out.println("");
+		//多く受講しているレッスン名取得
+		List<String> result = jdbcManager.selectBySql(String.class,
+				"SELECT INSTRUCTOR , MAX(CO) FROM (SELECT INSTRUCTOR, COUNT(*) AS CO FROM LESSSON WHERE USER_ID = ?  GROUP BY INSTRUCTOR) AS C  GROUP BY C.CO ORDER BY CO DESC",
+				lesson.userId).getResultList();		
+		
+		
+		return result;
+	}
+	
+	//SELECT INSTRUCTOR , MAX(CO) FROM (SELECT INSTRUCTOR, COUNT(*) AS CO  
+	//FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com'  GROUP BY INSTRUCTOR) AS C  GROUP BY C.CO ORDER BY CO DESC;
 	
 
 	

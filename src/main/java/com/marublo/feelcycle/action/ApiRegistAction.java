@@ -275,11 +275,43 @@ public class ApiRegistAction {
     	
     	Lessson lessson = new Lessson();
     	lessson.userId = apiRegistForm.loginId;
+    	List<ShukeiDataDto> shukeiList = new ArrayList<>();
+    	List<String> shukeiMaxDataList = new ArrayList<>();
     	
-    	List<ShukeiDataDto> shukeiDataList = new ArrayList();
     	
-    	shukeiDataList = lesssonService.shukeiData(lessson);
+    	//リストに詰める（一番受講しているレッスン)
+    	ShukeiDataDto shukeiDataDto = new ShukeiDataDto();
+    	shukeiMaxDataList = lesssonService.shukeiData(lessson);
+    	shukeiDataDto.setShukeiName("MaxLessoname");
+    	shukeiDataDto.setShukeiValue(shukeiMaxDataList.get(0));
+    	shukeiList.add(shukeiDataDto);
     	
-    	return "lesson.jsp";
+    	//リストに詰める（一番受講しているインストラクター）
+    	shukeiDataDto = new ShukeiDataDto();
+    	shukeiMaxDataList = new ArrayList<>();
+    	shukeiMaxDataList = lesssonService.shukeiInstructorData(lessson);
+    	shukeiDataDto.setShukeiName("MaxInstroctor");
+    	shukeiDataDto.setShukeiValue(shukeiMaxDataList.get(0));
+    	shukeiList.add(shukeiDataDto);
+    	
+    	//json
+    	json = "";
+    	
+    	json = json + ""
+    			+ "[";
+	
+		for(int i=0; i < shukeiList.size(); i++){
+			json = json + "{\"shukeiName\":\"" + shukeiList.get(i).getShukeiName() +"\","
+						+   "\"shukeiValue\":\"" + shukeiList.get(i).getShukeiValue() + "\""
+						+ "}";
+			if(i != shukeiList.size()-1){
+				json = json + ",";
+				
+			}else{
+				json = json +"]";
+							
+			}
+		}
+		return "lesson.jsp";
     }
 }
