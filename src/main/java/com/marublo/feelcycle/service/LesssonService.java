@@ -1,14 +1,18 @@
 package com.marublo.feelcycle.service;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Generated;
 import javax.annotation.Resource;
 
+import org.apache.commons.beanutils.BeanMap;
 import org.seasar.extension.jdbc.JdbcManager;
 
 import com.marublo.feelcycle.dto.LessonDataDto;
+import com.marublo.feelcycle.dto.LessonShukeiTempDto;
+import com.marublo.feelcycle.dto.ShukeiDataDto;
 import com.marublo.feelcycle.entity.Lessson;
 
 
@@ -82,4 +86,24 @@ public class LesssonService{
 		
 		return result;
 	}
+	
+	
+	public List<ShukeiDataDto> shukeiData(Lessson lessson) {
+		//SELECT LESSON_NAME  FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com' GROUP BY LESSON_NAME ORDER BY COUNT(*) DESC;	
+		//SELECT LESSON_NAME , COUNT(*) AS COUNT_NUMBER FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com'  GROUP BY LESSON_NAME ORDER BY COUNT(*) DESC
+		List<ShukeiDataDto> shukeiDataDtoList = new ArrayList();
+		List<String> tempList = new ArrayList<>();
+		System.out.println("");
+		//多く受講しているレッスン名取得
+		//List<Lessson> lessonData = getLessonData(lessson);
+		
+		
+		
+		
+		System.out.println("");
+		return null;
+	}
+	
+
+	
 }

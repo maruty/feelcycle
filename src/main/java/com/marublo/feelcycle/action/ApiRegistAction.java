@@ -27,6 +27,7 @@ import org.apache.http.client.config.RequestConfig;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
+import com.marublo.feelcycle.dto.ShukeiDataDto;
 import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.User;
 import com.marublo.feelcycle.entity.UserDetail;
@@ -268,4 +269,17 @@ public class ApiRegistAction {
     	return "lesson.jsp";
     }
     
+    //ログイン情報を返すAPI（集計関数インクルード）
+    @Execute(validator = false)
+    public String shukeiData(){
+    	
+    	Lessson lessson = new Lessson();
+    	lessson.userId = apiRegistForm.loginId;
+    	
+    	List<ShukeiDataDto> shukeiDataList = new ArrayList();
+    	
+    	shukeiDataList = lesssonService.shukeiData(lessson);
+    	
+    	return "lesson.jsp";
+    }
 }
