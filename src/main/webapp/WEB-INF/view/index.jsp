@@ -1,7 +1,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Dolteng Auto Generated</title>
+<title>バッチ処理</title>
 </head>
 <body>
 <h1>FEELCYCLEバッチ起動確認</h1>

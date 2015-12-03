@@ -22,8 +22,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 
-import org.apache.http.client.config.RequestConfig;
-
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
@@ -57,44 +55,21 @@ public class ApiRegistAction {
 	@Resource
 	public ApiRegistForm apiRegistForm;
 	
-	
 	@Resource
 	public UserService userService;
-	
 	
 	@Resource
 	public UserFeelcycleService userFeelcycleService;
 	
-	
 	@Resource
 	public LesssonService lesssonService;
-
 	
 	@Resource
 	public UserDetailService userDetailService;
-	
-	
-
-	
 	/*************DI*******************/
 	
 	/*************プロパティ*******************/
-	//public List<User> userList;
-	//public String unko = "";
-	//public String loginId = "";
-	//public String loginPass = "";
-	//public String nickName = "";
-	//public String feelcycleLoginId1 = "";
-	//public String feelcycleLoginPass1 = "";
-	//public String feelcycleLoginId2 = "";
-	//public String feelcycleLoginPass2 = "";
-	//public String json = "";
-	
-	//public String resultMessage = "registResult:false";
-	//public List<Lessson> resultList;
-	
-	//public RequestConfig requestConfig;
-	
+
 	public String resultMessage = "registResult:false";
 	public String json = "";
 	
@@ -108,14 +83,10 @@ public class ApiRegistAction {
     	String hashPass = userService.getSaltedPassword(apiRegistForm.loginPass,apiRegistForm.loginId);
     	user.userPass = hashPass;
     	
-    	
     	UserDetail userDetail = new UserDetail();
     	userDetail.userId = apiRegistForm.loginId;
-    	
-
-    	
     	userDetail.nickName = apiRegistForm.nickName;
-  
+
     	//feelcycle登録
     	UserFeelcycle userFc1 = new UserFeelcycle();
     	userFc1.userId = apiRegistForm.loginId;
@@ -129,7 +100,7 @@ public class ApiRegistAction {
     		userFc2.userIdFeelcycle = apiRegistForm.feelcycleLoginId2;
     		userFc2.userPassFeelcycle = apiRegistForm.feelcycleLoginPass2;
     	}
-    	//String resultMessage = "registResult:false";
+    	//登録がちゃんとできているかの判定処理
     	if ( apiRegistForm.feelcycleLoginId2 != null && apiRegistForm.feelcycleLoginId2.length() > 0 ){
     		if(userService.registUser(user) && userFeelcycleService.registUser(userFc1) &&
     				userFeelcycleService.registUser(userFc2) && userDetailService.registUser(userDetail)){

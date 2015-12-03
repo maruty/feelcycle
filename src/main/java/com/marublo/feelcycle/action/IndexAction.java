@@ -35,10 +35,6 @@ import com.marublo.feelcycle.service.FeelcycleService;
 import com.marublo.feelcycle.service.LesssonService;
 import com.marublo.feelcycle.service.UserService;
 
-
-
-
-
 public class IndexAction {
 	
 	/*
@@ -47,7 +43,6 @@ public class IndexAction {
 	 * 
 	 * 
 	 */
-	
 	/*************DI*******************/
 	@Resource
 	public UserService userService;
@@ -59,11 +54,12 @@ public class IndexAction {
 	public LesssonService lesssonService;
 	
 	/*************DI*******************/
-	
+	/*************Param*******************/
 	public List<User> userList;
-	
 	public String unko = "";
 	public RequestConfig requestConfig;
+	/*************Param*******************/
+	
 	
     @Execute(validator = false)
 	public String index() {
@@ -75,9 +71,6 @@ public class IndexAction {
     		for(int j=0; j < userList.get(i).userFeelCycleList.size(); j++){
     			try {
 					try {
-						//暗号化されたパスワード取得用
-						//String feelcycleLoginPassSalt = userService.getSaltedPassword(userList.get(i).userFeelCycleList.get(j).userPassFeelcycle, userList.get(i).userFeelCycleList.get(j).userIdFeelcycle);
-						
 						//1ID単位のレッスン履歴情報がくる
 						getLessonDataDtoList = feelcycleService.getPage(userList.get(i).userFeelCycleList.get(j).userIdFeelcycle
 													, userList.get(i).userFeelCycleList.get(j).userPassFeelcycle
@@ -88,10 +81,8 @@ public class IndexAction {
 							if(lesssonService.checkLessonData(lesson)){
 								//trueだったら存在していないのでインサートする
 								lesssonService.insertLessonData(lesson);
-								//System.out.println("確認");
 							}else{
 								//falseだったら存在してないのでインサートしない
-								
 							}
 						}
 						
@@ -108,33 +99,6 @@ public class IndexAction {
     		}
     		getLessonDataDtoList = new ArrayList<LessonDataDto>();
     	}
-    	
-    	
-    	
-    	
-    	//ユーザー情報を元に各受講データを取得
-    	
-    	
-    	//新規に追加したレッスンのみをインサートする
-    	
-    	
-    	//終了処理
-    	
-  
-    	
-    	//UserService userService = new UserService();
-    	
-    	
-    	
-		//List<User> teuserList = jdbcManager.from(User.class)
-        //        .getResultList();
-    	
-		//System.out.println("aa");
-		
-		
-    	//List<User> userList = userService.getAllUser();
-    	//this.unko = userList.get(0).userId.toString();
-    	
         return "index.jsp";
 	}
 }
