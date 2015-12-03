@@ -268,7 +268,7 @@ public class ApiRegistAction {
     	//json
     	json = "";
     	
-    	json = json + ""
+    	json = json + "{ \"shukei\" : "
     			+ "[";
 	
 		for(int i=0; i < shukeiList.size(); i++){
@@ -279,7 +279,7 @@ public class ApiRegistAction {
 				json = json + ",";
 				
 			}else{
-				json = json +"]";
+				json = json +"] }";
 							
 			}
 		}
