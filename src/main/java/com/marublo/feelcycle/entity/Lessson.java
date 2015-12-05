@@ -55,4 +55,9 @@ public class Lessson implements Serializable {
     /** lessonMashineプロパティ */
     @Column(length = 64, nullable = true, unique = false)
     public String lessonMashine;
+    
+    
+    public String getlessonDate(){
+    	return lessonDate;
+    }
 }

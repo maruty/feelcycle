@@ -17,14 +17,20 @@ package com.marublo.feelcycle.action;
 
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Collections;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
 
+import org.apache.commons.collections.map.HashedMap;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
 
+import com.marublo.feelcycle.condition.LessonComparator;
 import com.marublo.feelcycle.dto.ShukeiDataDto;
 import com.marublo.feelcycle.entity.Lessson;
 import com.marublo.feelcycle.entity.User;
@@ -285,4 +291,63 @@ public class ApiRegistAction {
 		}
 		return "lesson.jsp";
     }
+    
+    //ログイン情報を返すAPI（月ごとの回数を集計する）
+    @Execute(validator = false)
+    public String monthlyLessonData(){
+    	
+    	//いったん全件レッスンを落としてくる
+    	Lessson lessson = new Lessson();
+    	lessson.userId = apiRegistForm.loginId;
+    	List<Lessson>resultList = new ArrayList<Lessson>();
+    	resultList = lesssonService.getLessonData(lessson);
+    	//レッスンの日程順にソートをかける
+    	Collections.sort(resultList,new LessonComparator());
+    	System.out.println(resultList.get(0));
+    	//レッスン月をキーとしたマップを作成するのが良かと思います
+    	Map<String,Integer> monthlyLessonMap = new TreeMap();
+
+    	for(int i=0; i < resultList.size(); i++){
+    		//１件目は問答無用に突っ込む
+    		if(i == 0){
+    			monthlyLessonMap.put(resultList.get(i).lessonDate.substring(0,7), 1);
+    		}else{
+    			//既にKeyが存在しているかを確認する　例）2015/09
+    			if(monthlyLessonMap.containsKey(resultList.get(i).lessonDate.substring(0,7))){
+    				int tempCount = 0;
+    				tempCount = monthlyLessonMap.get(resultList.get(i).lessonDate.substring(0,7));
+    				tempCount++;
+    				monthlyLessonMap.put(resultList.get(i).lessonDate.substring(0,7),tempCount);
+    			}else{
+    			//Keyが存在していなかったら新しくKeyを突っ込む
+    				monthlyLessonMap.put(resultList.get(i).lessonDate.substring(0,7), 1);
+    			}
+    		}
+    	}
+    	
+    	
+    	//json
+    	json = "";
+    	
+    	json = json + "{ \"shukei\" : "
+    			+ "[";
+    	
+        Iterator<String> it = monthlyLessonMap.keySet().iterator();
+        int countMap = 0;
+        while (it.hasNext()) {
+            String key = it.next();
+            json = json + "{\"shukeiName\":\"" + key + "\","
+            			+  "\"shukeiValue\":\""+ monthlyLessonMap.get(key) + "\""
+            			+ "}";
+            if( countMap != monthlyLessonMap.size()-1){
+            	json = json + ",";
+            }else{
+            	json = json +"] }";
+            }
+            countMap++;
+        }
+		return "lesson.jsp";
+    }
+
+    
 }
