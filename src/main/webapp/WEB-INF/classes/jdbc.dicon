@@ -11,7 +11,7 @@
 		</property>
 		<!--本番の時はここを書き換えないといけない 
 		"jdbc:mysql://localhost:3306/CS_FEELCYCLE"
-		"jdbc:mysql://52.193.59.127:3306/CS_FEELCYCLE"
+
 		-->
 		<property name="URL">
 			"jdbc:mysql://localhost:3306/CS_FEELCYCLE"
