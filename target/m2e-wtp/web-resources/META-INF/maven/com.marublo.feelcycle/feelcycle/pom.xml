@@ -60,7 +60,7 @@
 		       <artifactId>maven-war-plugin</artifactId>
 		       <version>2.6</version>
 		       <goals>
-                   <goal>inplace</goal>
+                   <goal>package</goal>
                </goals>
    		 	</plugin>
 		</plugins>
