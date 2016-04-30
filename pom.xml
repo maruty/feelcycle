@@ -59,16 +59,7 @@
 			<plugin>
 		       <artifactId>maven-war-plugin</artifactId>
 		       <version>2.6</version>
-		       <executions>
-		         <execution>
-		           <id>default-war</id>
-		           <phase>package</phase>
-		           <goals>
-		             <goal>war</goal>
-		           </goals>
-		         </execution>
-		       </executions>
-    		 </plugin>
+   		 	</plugin>
 		</plugins>
 	</build>
 	<pluginRepositories>
