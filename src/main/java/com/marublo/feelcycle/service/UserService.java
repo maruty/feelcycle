@@ -87,10 +87,10 @@ public class UserService{
 	}
 
 	public boolean getSelectUser(String loginId, String loginPass) {
-		String hashPass = getSaltedPassword(loginPass,loginId);
+		//String hashPass = getSaltedPassword(loginPass,loginId);
 		
 		List<User> result = jdbcManager.from(User.class).where("userId = ? and userPass = ?", 
-																loginId,hashPass)
+																loginId,loginPass)
 				.getResultList();
 		if(result.size() > 0){
 			return true;
