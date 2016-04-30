@@ -36,6 +36,8 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<groupId>org.apache.maven.plugins</groupId>
+				<version>3.1</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
@@ -108,7 +110,7 @@
 	</pluginRepositories>
 	<repositories>
 		<repository>
-			<id>local</id>
+			<id>localrepository</id>
 			<name>Local Repository</name>
 			<url>file:repo</url>
 		</repository>
