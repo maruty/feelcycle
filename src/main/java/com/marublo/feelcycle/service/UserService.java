@@ -36,9 +36,9 @@ public class UserService{
 	
 	//ユーザーリスト取得
 	public List<User> getUser(User user){
-		String hashPass = getSaltedPassword(user.userPass,user.userId);
+		//String hashPass = getSaltedPassword(user.userPass,user.userId);
 		List<User> result = jdbcManager.from(User.class).innerJoin("userDetail").where("userId = ? and userPass = ?", 
-				user.userId,hashPass).getResultList();
+				user.userId,user.userPass).getResultList();
 		//System.out.println("");
 		return result;
 	}
