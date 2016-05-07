@@ -203,11 +203,15 @@ public class ApiRegistAction {
 				int strCountMonth = tempArray[1].length();
 				if(strCountMonth == 1){
 					targetDate = targetDate + ("0" + tempArray[1]) + "/";
+				}else{
+					targetDate =  targetDate + tempArray[1] + "/";
 				}
 				//日の部分
 				int strCountDay = tempArray[2].length();
 				if(strCountDay == 1){
 					targetDate = targetDate + ("0" + tempArray[2]) + "(土)";
+				}else{
+					targetDate =  targetDate + tempArray[2] + "(土)";
 				}
 				
 				resultList.get(i).lessonDate = targetDate;
