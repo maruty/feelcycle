@@ -196,7 +196,7 @@ public class ApiRegistAction {
     		tempStr = resultList.get(i).lessonDate;
     		
     		//10字以上の場合、正規文字列なので特に処理を行わない
-    		if(tempStr.length() > 10){
+    		if(tempStr.length() < 10){
         		String[]tempArray = tempStr.split("/",0);
         		String targetDate = "";
         		if(tempArray.length == 3){
