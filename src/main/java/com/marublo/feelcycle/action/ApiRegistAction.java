@@ -188,6 +188,33 @@ public class ApiRegistAction {
         			+ "[";
     	
     	for(int i=0; i < resultList.size(); i++){
+    		
+    		//データインサート対応文字列が2016/2/2みたいになってるものと
+    		//2016/05/07(土)みたいになっているものがあるのでそれを揃える
+    		String tempStr = "";
+    		
+    		tempStr = resultList.get(i).lessonDate;
+    		String[]tempArray = tempStr.split("/",0);
+    		String targetDate = "";
+    		if(tempArray.length == 3){
+    			//年の部分
+    			targetDate = tempArray[0] + "/";
+				//月の部分
+				int strCountMonth = tempArray[1].length();
+				if(strCountMonth == 1){
+					targetDate = targetDate + ("0" + tempArray[1]) + "/";
+				}
+				//日の部分
+				int strCountDay = tempArray[2].length();
+				if(strCountDay == 1){
+					targetDate = targetDate + ("0" + tempArray[2]) + "(土)";
+				}
+				
+				resultList.get(i).lessonDate = targetDate;
+    		}
+    		
+    		
+    		
     		json = json + "{\"lessonDate\":\"" + resultList.get(i).lessonDate +"\","
     					+   "\"lessonTimeFrom\":\"" + resultList.get(i).lessonTimeFrom + "\","
     					+   "\"lessonTimeTo\":\""   + resultList.get(i).lessonTimeTo + "\","
@@ -225,6 +252,9 @@ public class ApiRegistAction {
         			+ "[";
     	
     	for(int i=0; i < resultList.size(); i++){
+    		
+    		
+    		
     		json = json + "{\"lessonDate\":\"" + resultList.get(i).lessonDate +"\","
     					+   "\"lessonTimeFrom\":\"" + resultList.get(i).lessonTimeFrom + "\","
     					+   "\"lessonTimeTo\":\""   + resultList.get(i).lessonTimeTo + "\","
