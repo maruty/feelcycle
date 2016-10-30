@@ -24,11 +24,13 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 
 import org.apache.commons.collections.map.HashedMap;
 import org.seasar.struts.annotation.ActionForm;
 import org.seasar.struts.annotation.Execute;
+import org.seasar.struts.util.ResponseUtil;
 
 import com.marublo.feelcycle.condition.LessonComparator;
 import com.marublo.feelcycle.dto.ShukeiDataDto;
@@ -335,7 +337,9 @@ public class ApiRegistAction {
     //ログイン情報を返すAPI（月ごとの回数を集計する）
     @Execute(validator = false)
     public String monthlyLessonData(){
-    	
+    	HttpServletResponse response = ResponseUtil.getResponse();
+    	response.setHeader("Access-Control-Allow-Headers", "*");
+    	response.setHeader("Access-Control-Allow-Origin", "*");
     	//いったん全件レッスンを落としてくる
     	Lessson lessson = new Lessson();
     	lessson.userId = apiRegistForm.loginId;
