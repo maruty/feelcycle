@@ -82,7 +82,14 @@ public class LesssonService{
 		return result;
 	}
 	
-	
+	public List<Lessson> getInstructorCountInfo(Lessson lessson) {
+		
+		List<Lessson> result = jdbcManager.selectBySql(Lessson.class,
+														"select * FROM LESSSON where USER_ID = ? ORDER BY INSTRUCTOR asc", 
+														lessson.userId ).getResultList();
+		//SELECT * FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com' ORDER BY LESSON_NAME asc;
+		return result;
+	}
 	
 	
 	

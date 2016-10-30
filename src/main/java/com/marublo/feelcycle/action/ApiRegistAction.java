@@ -334,6 +334,63 @@ public class ApiRegistAction {
 		return "lesson.jsp";
     }
     
+    //レッスン単位でのサマリー
+    @Execute(validator = false)
+    public String instructorCountInformation(){
+    	//レスポンスを許可することによってクロスドメインを許可
+    	HttpServletResponse response = ResponseUtil.getResponse();
+    	response.setHeader("Access-Control-Allow-Headers", "*");
+    	response.setHeader("Access-Control-Allow-Origin", "*");
+    	//いったん全件レッスンを落としてくる
+    	Lessson lessson = new Lessson();
+    	lessson.userId = apiRegistForm.loginId;
+    	List<Lessson>resultList = new ArrayList<Lessson>();
+    	resultList = lesssonService.getInstructorCountInfo(lessson);
+    	
+    	Map<String,Integer> monthlyLessonMap = new TreeMap<>();
+    	String tempLessonName = "";
+    	
+    	for(Lessson lesson : resultList){
+    		if(tempLessonName != lesson.instructor ){
+    			if(monthlyLessonMap.containsKey(lesson.instructor)){
+    				int tempCount = 0;
+    				tempCount = monthlyLessonMap.get(lesson.instructor);
+    				tempCount++;
+    				monthlyLessonMap.put(lesson.instructor,tempCount);
+    			}else{
+    				monthlyLessonMap.put(lesson.instructor, 1);
+    			}
+    			
+    		}
+    		tempLessonName = lesson.instructor;
+    	}
+    	
+    	//json
+    	json = "";
+    	
+    	json = json + "{ \"shukei\" : "
+    			+ "[";
+    	
+        Iterator<String> it = monthlyLessonMap.keySet().iterator();
+        int countMap = 0;
+        while (it.hasNext()) {
+            String key = it.next();
+            json = json + "{\"shukeiName\":\"" + key + "\","
+            			+  "\"shukeiValue\":\""+ monthlyLessonMap.get(key) + "\""
+            			+ "}";
+            if( countMap != monthlyLessonMap.size()-1){
+            	json = json + ",";
+            }else{
+            	json = json +"] }";
+            }
+            countMap++;
+        }
+    	
+    	
+    	return "lesson.jsp";
+    }
+    
+    //レッスン単位でのサマリー
     @Execute(validator = false)
     public String lessonCountInformation(){
     	//レスポンスを許可することによってクロスドメインを許可
