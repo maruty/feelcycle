@@ -19,7 +19,8 @@ public class CrossFilter implements Filter{
 	 
 	        res.setHeader("Access-Control-Allow-Origin", "*");
 	        res.setHeader("Access-Control-Allow-Methods", "POST, PUT, GET, DELETE, OPTIONS");
-	        res.setHeader("Access-Control-Allow-Headers", req.getHeader("Access-Control-Request-Headers"));
+	        //res.setHeader("Access-Control-Allow-Headers", req.getHeader("Access-Control-Request-Headers"));
+	        res.setHeader("Access-Control-Allow-Headers", "*");
 	        res.setHeader("Access-Control-Max-Age", "-1");
 	 
 	        chain.doFilter(req, res);
