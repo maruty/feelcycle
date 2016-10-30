@@ -72,6 +72,25 @@ public class LesssonService{
 		
 		return result;
 	}
+	
+	public List<Lessson> getLessonCountInfo(Lessson lessson) {
+		// TODO 自動生成されたメソッド・スタブ
+		//今月の日付取得
+		Calendar cal = 	Calendar.getInstance();
+		int year = cal.get(Calendar.YEAR);
+		int month = cal.get(Calendar.MONTH) + 1;
+		
+		List<Lessson> result = jdbcManager.selectBySql(Lessson.class,
+														"select * FROM LESSSON where USER_ID = ? AND ORDER BY LESSON_NAME asc", 
+														lessson.userId ).getResultList();
+		//SELECT * FROM LESSSON WHERE USER_ID = 'yanagisawa.trade@gmail.com' ORDER BY LESSON_NAME asc;
+		return result;
+	}
+	
+	
+	
+	
+	
 	public List<Lessson> getLessonDataMonthly(Lessson lessson) {
 		// TODO 自動生成されたメソッド・スタブ
 		//今月の日付取得

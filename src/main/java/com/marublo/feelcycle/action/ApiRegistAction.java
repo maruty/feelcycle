@@ -334,9 +334,66 @@ public class ApiRegistAction {
 		return "lesson.jsp";
     }
     
+    @Execute(validator = false)
+    public String lessonCountInformation(){
+    	//レスポンスを許可することによってクロスドメインを許可
+    	HttpServletResponse response = ResponseUtil.getResponse();
+    	response.setHeader("Access-Control-Allow-Headers", "*");
+    	response.setHeader("Access-Control-Allow-Origin", "*");
+    	//いったん全件レッスンを落としてくる
+    	Lessson lessson = new Lessson();
+    	lessson.userId = apiRegistForm.loginId;
+    	List<Lessson>resultList = new ArrayList<Lessson>();
+    	resultList = lesssonService.getLessonCountInfo(lessson);
+    	
+    	Map<String,Integer> monthlyLessonMap = new TreeMap<>();
+    	String tempLessonName = "";
+    	
+    	for(Lessson lesson : resultList){
+    		if(tempLessonName != lesson.lessonName ){
+    			if(monthlyLessonMap.containsKey(lesson.lessonName)){
+    				int tempCount = 0;
+    				tempCount = monthlyLessonMap.get(lesson.lessonName);
+    				tempCount++;
+    				monthlyLessonMap.put(lesson.lessonName,tempCount);
+    			}else{
+    				monthlyLessonMap.put(lesson.lessonName, 1);
+    			}
+    			
+    		}
+    		tempLessonName = lesson.lessonName;
+    	}
+    	
+    	//json
+    	json = "";
+    	
+    	json = json + "{ \"shukei\" : "
+    			+ "[";
+    	
+        Iterator<String> it = monthlyLessonMap.keySet().iterator();
+        int countMap = 0;
+        while (it.hasNext()) {
+            String key = it.next();
+            json = json + "{\"shukeiName\":\"" + key + "\","
+            			+  "\"shukeiValue\":\""+ monthlyLessonMap.get(key) + "\""
+            			+ "}";
+            if( countMap != monthlyLessonMap.size()-1){
+            	json = json + ",";
+            }else{
+            	json = json +"] }";
+            }
+            countMap++;
+        }
+    	
+    	
+    	return "lesson.jsp";
+    }
+    
+    
     //ログイン情報を返すAPI（月ごとの回数を集計する）
     @Execute(validator = false)
     public String monthlyLessonData(){
+    	//レスポンスを許可することによってクロスドメインを許可
     	HttpServletResponse response = ResponseUtil.getResponse();
     	response.setHeader("Access-Control-Allow-Headers", "*");
     	response.setHeader("Access-Control-Allow-Origin", "*");
@@ -349,7 +406,7 @@ public class ApiRegistAction {
     	Collections.sort(resultList,new LessonComparator());
     	System.out.println(resultList.get(0));
     	//レッスン月をキーとしたマップを作成するのが良かと思います
-    	Map<String,Integer> monthlyLessonMap = new TreeMap();
+    	Map<String,Integer> monthlyLessonMap = new TreeMap<>();
 
     	for(int i=0; i < resultList.size(); i++){
     		//１件目は問答無用に突っ込む
